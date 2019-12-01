@@ -16,7 +16,6 @@ use Modules\Account\Services\Auth\RegisterService;
 
 /**
  * Class UserController
- * @package Modules\Account\Http\Controllers\Auth
  */
 class UserController extends Controller
 {

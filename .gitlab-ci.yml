@@ -67,7 +67,7 @@ codestyle:
   stage: test
   dependencies: []
   script:
-    - phpcs -p --colors --standard=PSR2 --extensions=php --ignore=./Resources,./Routes Modules
+    - phpcs -p --colors --standard=PSR2 --extensions=php --ignore=./Resources,./Routes,./Database/Migrations Modules
 
 production:
   stage: deploy

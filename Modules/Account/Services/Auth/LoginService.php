@@ -14,7 +14,6 @@ use Modules\Account\Services\Auth\Interfaces\LoginServiceInterface;
 
 /**
  * Class LoginService
- * @package Modules\Account\Services\Auth
  */
 class LoginService implements LoginServiceInterface
 {

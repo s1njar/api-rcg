@@ -7,13 +7,11 @@
 
 namespace Modules\Account\Services\Auth\Interfaces;
 
-
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
  * Interface LoginServiceInterface
- * @package Modules\Account\Services\Auth\Interfaces
  */
 interface LoginServiceInterface
 {

@@ -7,10 +7,12 @@
 
 namespace Modules\Account\Services\Auth\Interfaces;
 
-
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Interface RegisterServiceInterface
+ */
 interface RegisterServiceInterface
 {
     /**

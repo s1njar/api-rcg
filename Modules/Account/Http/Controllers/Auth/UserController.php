@@ -13,6 +13,8 @@ use Illuminate\Routing\Controller;
 use Modules\Account\Entities\User;
 use Modules\Account\Services\Auth\LoginService;
 use Modules\Account\Services\Auth\RegisterService;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * Class UserController
@@ -97,7 +99,32 @@ class UserController extends Controller
     public function current(): JsonResponse
     {
         $user = auth('api')->user();
+        $token = JWTAuth::fromUser($user);
 
-        return response()->json($user);
+        return $this->respond($token);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respond(Auth::guard()->refresh());
+    }
+
+    /**
+     * @param $token
+     * @return JsonResponse
+     */
+    private function respond($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'user' => auth('api')->user(),
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ]);
     }
 }

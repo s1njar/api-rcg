@@ -18,4 +18,5 @@ Route::group(['middleware' => ['api'], 'prefix' => 'auth', 'namespace' => 'Auth'
     Route::post('register', 'UserController@register');
     Route::post('logout', 'UserController@logout');
     Route::post('current', 'UserController@current');
+    Route::post('refresh', 'UserController@refresh');
 });

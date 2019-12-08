@@ -20,3 +20,8 @@ Route::group(['middleware' => ['api'], 'prefix' => 'auth', 'namespace' => 'Auth'
     Route::post('current', 'UserController@current');
     Route::post('refresh', 'UserController@refresh');
 });
+
+Route::group(['middleware' => ['api'], 'prefix' => 'user', 'namespace' => 'User\Password'], function () {
+    Route::post('forgot', 'ForgotPasswordController@execute');
+    Route::post('reset', 'ResetPasswordController@execute');
+});

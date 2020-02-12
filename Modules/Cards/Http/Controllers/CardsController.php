@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cards\Entities\Card;
 use Modules\Cards\Helper\GeneratorHelper;
-use Modules\Cards\Services\CreateCardService;
+use Modules\Cards\Services\CardRepositoryService;
 use Throwable;
 
 /**
@@ -16,9 +16,9 @@ use Throwable;
 class CardsController extends Controller
 {
     /**
-     * @var CreateCardService
+     * @var CardRepositoryService
      */
-    private $createCardService;
+    private $cardRepositoryService;
     /**
      * @var GeneratorHelper
      */
@@ -27,16 +27,16 @@ class CardsController extends Controller
     /**
      * CardsController constructor.
      *
-     * @param CreateCardService $createCardService
+     * @param CardRepositoryService $cardRepositoryService
      * @param GeneratorHelper $generatorHelper
      */
     public function __construct(
-        CreateCardService $createCardService,
+        CardRepositoryService $cardRepositoryService,
         GeneratorHelper $generatorHelper
     ) {
 //        $this->middleware('auth:api');
 
-        $this->createCardService = $createCardService;
+        $this->cardRepositoryService = $cardRepositoryService;
         $this->generatorHelper = $generatorHelper;
     }
 
@@ -55,15 +55,55 @@ class CardsController extends Controller
                 Card::MORAL_FIELD => 'required|integer',
                 Card::STRENGTH_FIELD => 'required|integer',
                 Card::PICTURE_FIELD => 'required|url',
-                Card::CATEGORY_FIELD => 'required|string',
-                Card::CARD_TYPE_FIELD => 'required|string',
-                Card::RARITY_TYPE_FIELD => 'required|string',
+                Card::CATEGORY_FIELD => 'required|integer',
+                Card::CARD_TYPE_FIELD => 'required|integer',
+                Card::RARITY_TYPE_FIELD => 'required|integer',
                 Card::ABILITIES_RELATION => 'required'
             ]);
         } else {
             $request = $this->generatorHelper->createRequest();
         }
 
-        return $this->createCardService->create($request);
+        return $this->cardRepositoryService->create($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function search(Request $request): JsonResponse
+    {
+        return $this->cardRepositoryService->search();
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchById(Request $request): JsonResponse
+    {
+        $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $id = $request->get('id');
+
+        return $this->cardRepositoryService->searchById($id);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $id = $request->get('id');
+
+        return $this->cardRepositoryService->delete($id);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Deck\Entities\Deck;
-use Modules\Deck\Services\CreateDeckService;
+use Modules\Deck\Services\DeckRepositoryService;
 use Throwable;
 
 /**
@@ -15,20 +15,20 @@ use Throwable;
 class DeckController extends Controller
 {
     /**
-     * @var CreateDeckService
+     * @var DeckRepositoryService
      */
-    private $createDeckService;
+    private $deckRepositoryService;
 
     /**
      * DeckController constructor.
      *
-     * @param CreateDeckService $createDeckService
+     * @param DeckRepositoryService $deckRepositoryService
      */
-    public function __construct(CreateDeckService $createDeckService)
+    public function __construct(DeckRepositoryService $deckRepositoryService)
     {
 //        $this->middleware('auth:api');
 
-        $this->createDeckService = $createDeckService;
+        $this->deckRepositoryService = $deckRepositoryService;
     }
 
     /**
@@ -47,6 +47,46 @@ class DeckController extends Controller
             Deck::CARDS_RELATION => 'required',
         ]);
 
-        return $this->createDeckService->create($request);
+        return $this->deckRepositoryService->create($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function search(Request $request): JsonResponse
+    {
+        return $this->deckRepositoryService->search();
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchById(Request $request): JsonResponse
+    {
+        $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $id = $request->get('id');
+
+        return $this->deckRepositoryService->searchById($id);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $id = $request->get('id');
+
+        return $this->deckRepositoryService->delete($id);
     }
 }

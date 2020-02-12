@@ -117,32 +117,32 @@ class GeneratorHelper
     }
 
     /**
-     * Returns category as code.
+     * Returns category as id.
      *
-     * @return string
+     * @return int
      */
-    public function getCategory(): string
+    public function getCategory(): int
     {
-        return 'test';
+        return 1;
     }
 
     /**
-     * Returns card_type as code.
+     * Returns card_type as id.
      *
-     * @return string
+     * @return int
      */
-    public function getCardType(): string
+    public function getCardType(): int
     {
-        return 'light_melee_infantry';
+        return 1;
     }
 
     /**
-     * Returns rarity as code.
+     * Returns rarity as id.
      *
-     * @return string
+     * @return int
      */
-    public function getRarity(): string
+    public function getRarity(): int
     {
-        return 'test';
+        return 1;
     }
 }

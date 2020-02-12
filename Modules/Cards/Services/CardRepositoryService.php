@@ -2,35 +2,20 @@
 
 namespace Modules\Cards\Services;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Cards\Entities\Card;
 use Modules\Cards\Entities\CardType;
 use Modules\Cards\Entities\Category;
 use Modules\Cards\Entities\Rarity;
-use Modules\Cards\Services\Interfaces\CreateCardServiceInterface;
 use Throwable;
 
 /**
  * Class CreateCardService
  */
-class CreateCardService implements CreateCardServiceInterface
+class CardRepositoryService
 {
-    /**
-     * @var Card
-     */
-    private $card;
-
-    /**
-     * CreateCardService constructor.
-     *
-     * @param Card $card
-     */
-    public function __construct(Card $card)
-    {
-        $this->card = $card;
-    }
-
     /**
      * Creates new card.
      *
@@ -40,6 +25,8 @@ class CreateCardService implements CreateCardServiceInterface
      */
     public function create(Request $request): JsonResponse
     {
+        $card = new Card();
+
         $flat = $request->only([
             Card::NAME_FIELD,
             Card::CODE_FIELD,
@@ -56,57 +43,108 @@ class CreateCardService implements CreateCardServiceInterface
             Card::ABILITIES_RELATION
         ]);
 
-        $isSaved = $this->card->fill($flat)->saveOrFail();
+        $isSaved = $card->fill($flat)->saveOrFail();
 
-        $this->card
+        $card
             ->category()
             ->associate(
                 Category::where(
-                    Category::CODE_FIELD,
+                    'id',
                     $relations[Card::CATEGORY_FIELD]
                 )->first()
             );
 
-        $this->card
+        $card
             ->cardType()
             ->associate(
                 CardType::where(
-                    CardType::CODE_FIELD,
+                    'id',
                     $relations[Card::CARD_TYPE_FIELD]
                 )->first()
             );
 
-        $this->card
+        $card
             ->rarity()
             ->associate(
                 Rarity::where(
-                    Rarity::CODE_FIELD,
+                    'id',
                     $relations[Card::RARITY_TYPE_FIELD]
                 )->first()
             );
 
-        $this->card
+        $card
             ->abilities()
             ->createMany(
                 $relations[Card::ABILITIES_RELATION]
             );
 
-        if (!$isSaved || !$this->card->saveOrFail()) {
+        if (!$isSaved || !$card->saveOrFail()) {
             return response()->json(['status' => 'error', 'message' => 'Created card could not be saved'], 500);
         }
 
-        return $this->respond($this->card);
-    }
-
-    /**
-     * @param Card $card
-     * @return JsonResponse
-     */
-    private function respond(Card $card): JsonResponse
-    {
         return response()->json([
             'status' => 'ok',
             'card' => $card->getAttributes()
         ]);
+    }
+
+    /**
+     *
+     */
+    public function search(): JsonResponse
+    {
+        $cards = Card::all();
+
+        return response()->json([
+            'status' => 'ok',
+            'cards' => $cards->all()
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function searchById(int $id): JsonResponse
+    {
+        /** @var Card $card */
+        $card = Card::find($id);
+
+        if (!$card) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The card you searched for could not be found'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'ok',
+            'card' => $card->getAttributes()
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function delete(int $id): JsonResponse
+    {
+        /** @var Card $card */
+        $card = Card::find($id);
+
+        if (!$card) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The card you wanted to delete could not be found'
+            ], 404);
+        }
+
+        $card->delete();
+
+        return response()->json([
+            'status' => 'ok',
+            'card' => $card->getAttributes()
+        ], 404);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\Cards\Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\DB;
  * Class RaritiesTableSeederTableSeeder
  * @package Modules\Cards\Database\Seeders
  */
-class RaritiesTableSeederTableSeeder extends Seeder
+class RaritiesTableSeeder extends Seeder
 {
     /**
      *
@@ -52,7 +53,9 @@ class RaritiesTableSeederTableSeeder extends Seeder
     {
         DB::table('rarities')->insertOrIgnore([
             'name' => $name,
-            'code' => $code
+            'code' => $code,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Modules\Cards\Database\Seeders\CardTypesTableSeeder;
+use Modules\Cards\Database\Seeders\CategoriesTableSeeder;
+use Modules\Cards\Database\Seeders\RaritiesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call([
+            CardTypesTableSeeder::class,
+            CategoriesTableSeeder::class,
+            RaritiesTableSeeder::class,
+        ]);
     }
 }

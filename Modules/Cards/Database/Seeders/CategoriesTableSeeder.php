@@ -2,11 +2,12 @@
 
 namespace Modules\Cards\Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class CategoriesSeederTableSeeder extends Seeder
+class CategoriesTableSeeder extends Seeder
 {
     /**
      *
@@ -48,7 +49,9 @@ class CategoriesSeederTableSeeder extends Seeder
     {
         DB::table('categories')->insertOrIgnore([
             'name' => $name,
-            'code' => $code
+            'code' => $code,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

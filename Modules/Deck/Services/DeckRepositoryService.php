@@ -54,7 +54,8 @@ class DeckRepositoryService
                     [
                         'status' => 'error',
                         'message' => 'Seems that some cards the deck contains, does not exist.'
-                    ], 500
+                    ],
+                    500
                 );
         }
 

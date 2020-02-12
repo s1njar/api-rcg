@@ -47,9 +47,10 @@ class CardsController extends Controller
      */
     public function create(Request $request): JsonResponse
     {
-        if ($request->has(Card::NAME_FIELD)) {
+        if ($request->has(Card::CODE_FIELD)) {
             $request->validate([
                 Card::NAME_FIELD => 'required|string',
+                Card::CODE_FIELD => 'required|string',
                 Card::LIFE_FIELD => 'required|integer',
                 Card::MORAL_FIELD => 'required|integer',
                 Card::STRENGTH_FIELD => 'required|integer',
@@ -57,7 +58,7 @@ class CardsController extends Controller
                 Card::CATEGORY_FIELD => 'required|string',
                 Card::CARD_TYPE_FIELD => 'required|string',
                 Card::RARITY_TYPE_FIELD => 'required|string',
-                Card::ABILITIES_FIELD => 'required'
+                Card::ABILITIES_RELATION => 'required'
             ]);
         } else {
             $request = $this->generatorHelper->createRequest();

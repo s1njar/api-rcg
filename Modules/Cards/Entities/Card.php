@@ -13,14 +13,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Card extends Model
 {
     public const NAME_FIELD = 'name';
+    public const CODE_FIELD = 'code';
     public const LIFE_FIELD = 'life';
     public const MORAL_FIELD = 'moral';
-    public const ABILITIES_FIELD = 'abilities';
     public const STRENGTH_FIELD = 'strength';
     public const CATEGORY_FIELD = 'category_id';
     public const PICTURE_FIELD = 'picture';
     public const CARD_TYPE_FIELD = 'card_type_id';
     public const RARITY_TYPE_FIELD = 'rarity_id';
+
+    public const ABILITIES_RELATION = 'abilities';
 
     protected $table = 'cards';
 
@@ -29,6 +31,7 @@ class Card extends Model
      */
     protected $fillable = [
         self::NAME_FIELD,
+        self::CODE_FIELD,
         self::LIFE_FIELD,
         self::MORAL_FIELD,
         self::STRENGTH_FIELD,

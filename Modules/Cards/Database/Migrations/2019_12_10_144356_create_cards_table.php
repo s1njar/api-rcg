@@ -20,21 +20,24 @@ class CreateCardsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('life');
-            $table->integer('costs');
-            $table->integer('abilities');
+            $table->integer('moral');
             $table->integer('strength');
-            $table->integer('category');
             $table->string('picture');
-            $table->unsignedBigInteger('cart_type_id');
-            $table->unsignedBigInteger('rarity_id');
+            $table->unsignedBigInteger('card_type_id')->nullable();
+            $table->unsignedBigInteger('rarity_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
 
-            $table->foreign('cart_type_id')
+            $table->foreign('card_type_id')
                 ->references('id')
                 ->on('card_types')
                 ->onDelete('cascade');
             $table->foreign('rarity_id')
                 ->references('id')
                 ->on('rarities')
+                ->onDelete('cascade');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
                 ->onDelete('cascade');
 
             $table->timestamps();

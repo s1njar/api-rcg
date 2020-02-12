@@ -15,9 +15,16 @@ class CreateCardsAbilitiesTable extends Migration
     {
         Schema::create('cards_abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('card_id')->unsigned();
-            $table->integer('ability_id')->unsigned();
-            $table->timestamps();
+            $table->unsignedBigInteger('card_id');
+            $table->foreign('card_id')
+                ->references('id')
+                ->on('cards')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('ability_id');
+            $table->foreign('ability_id')
+                ->references('id')
+                ->on('abilities')
+                ->onDelete('cascade');
         });
     }
 

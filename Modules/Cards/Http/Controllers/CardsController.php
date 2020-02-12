@@ -2,78 +2,67 @@
 
 namespace Modules\Cards\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Cards\Entities\Card;
+use Modules\Cards\Helper\GeneratorHelper;
+use Modules\Cards\Services\CreateCardService;
+use Throwable;
 
+/**
+ * Class CardsController
+ */
 class CardsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Response
+     * @var CreateCardService
      */
-    public function index()
-    {
-        return view('cards::index');
+    private $createCardService;
+    /**
+     * @var GeneratorHelper
+     */
+    private $generatorHelper;
+
+    /**
+     * CardsController constructor.
+     *
+     * @param CreateCardService $createCardService
+     * @param GeneratorHelper $generatorHelper
+     */
+    public function __construct(
+        CreateCardService $createCardService,
+        GeneratorHelper $generatorHelper
+    ) {
+//        $this->middleware('auth:api');
+
+        $this->createCardService = $createCardService;
+        $this->generatorHelper = $generatorHelper;
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('cards::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
+     * @throws Throwable
      */
-    public function store(Request $request)
+    public function create(Request $request): JsonResponse
     {
-        //
-    }
+        if ($request->has(Card::NAME_FIELD)) {
+            $request->validate([
+                Card::NAME_FIELD => 'required|string',
+                Card::LIFE_FIELD => 'required|integer',
+                Card::MORAL_FIELD => 'required|integer',
+                Card::STRENGTH_FIELD => 'required|integer',
+                Card::PICTURE_FIELD => 'required|url',
+                Card::CATEGORY_FIELD => 'required|string',
+                Card::CARD_TYPE_FIELD => 'required|string',
+                Card::RARITY_TYPE_FIELD => 'required|string',
+                Card::ABILITIES_FIELD => 'required'
+            ]);
+        } else {
+            $request = $this->generatorHelper->createRequest();
+        }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('cards::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('cards::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $this->createCardService->create($request);
     }
 }

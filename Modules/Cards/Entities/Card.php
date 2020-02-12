@@ -14,11 +14,13 @@ class Card extends Model
 {
     public const NAME_FIELD = 'name';
     public const LIFE_FIELD = 'life';
-    public const COSTS_FIELD = 'costs';
+    public const MORAL_FIELD = 'moral';
     public const ABILITIES_FIELD = 'abilities';
     public const STRENGTH_FIELD = 'strength';
-    public const CATEGORY_FIELD = 'category';
+    public const CATEGORY_FIELD = 'category_id';
     public const PICTURE_FIELD = 'picture';
+    public const CARD_TYPE_FIELD = 'card_type_id';
+    public const RARITY_TYPE_FIELD = 'rarity_id';
 
     protected $table = 'cards';
 
@@ -28,11 +30,12 @@ class Card extends Model
     protected $fillable = [
         self::NAME_FIELD,
         self::LIFE_FIELD,
-        self::COSTS_FIELD,
-        self::ABILITIES_FIELD,
+        self::MORAL_FIELD,
         self::STRENGTH_FIELD,
         self::CATEGORY_FIELD,
         self::PICTURE_FIELD,
+        self::CARD_TYPE_FIELD,
+        self::RARITY_TYPE_FIELD,
     ];
 
     /**
@@ -40,7 +43,7 @@ class Card extends Model
      */
     public function abilities()
     {
-        return $this->belongsToMany(Ability::class);
+        return $this->belongsToMany(Ability::class, 'cards_abilities');
     }
 
     /**
@@ -57,5 +60,13 @@ class Card extends Model
     public function rarity()
     {
         return $this->belongsTo(Rarity::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -2,31 +2,36 @@
 
 namespace Modules\Cards\Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Class RaritiesTableSeederTableSeeder
- * @package Modules\Cards\Database\Seeders
- */
-class RaritiesTableSeederTableSeeder extends Seeder
+class CardTypesTableSeeder extends Seeder
 {
     /**
      *
      */
     private const DEFAULT_RARITY_VALUES = [
         [
-            'Bronze',
-            'bronze'
+            'Light Melee Infantry',
+            'light_melee_infantry'
         ],
         [
-            'Silver',
-            'silver'
+            'Heavy Melee Infantry',
+            'heavy_Melee_infantry'
         ],
         [
-            'Gold',
-            'gold'
+            'Light Distance Infantry',
+            'light_distance_infantry'
+        ],
+        [
+            'Heavy Distance Infantry',
+            'heavy_distance_infantry'
+        ],
+        [
+            'Cavalry',
+            'cavalry'
         ]
     ];
 
@@ -50,9 +55,11 @@ class RaritiesTableSeederTableSeeder extends Seeder
      */
     private function insert(string $name, string $code)
     {
-        DB::table('rarities')->insertOrIgnore([
+        DB::table('card_types')->insertOrIgnore([
             'name' => $name,
-            'code' => $code
+            'code' => $code,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

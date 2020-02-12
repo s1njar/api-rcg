@@ -1,5 +1,6 @@
 {
     "Account": true,
     "Example": false,
-    "Cards": true
+    "Cards": true,
+    "Deck": true
 }

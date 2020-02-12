@@ -16,9 +16,9 @@ class CreateCardsTable extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('cards', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('code')->unique();
             $table->integer('life');
             $table->integer('moral');
             $table->integer('strength');

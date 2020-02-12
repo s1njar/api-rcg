@@ -22,9 +22,10 @@ class GeneratorHelper
         $request->request->add(
             [
                 Card::NAME_FIELD => $this->getName(),
+                Card::CODE_FIELD => $this->getCode(),
                 Card::LIFE_FIELD => $this->getLife(),
                 Card::MORAL_FIELD => $this->getMoral(),
-                Card::ABILITIES_FIELD => $this->getAbilities(),
+                Card::ABILITIES_RELATION => $this->getAbilities(),
                 Card::STRENGTH_FIELD => $this->getStrength(),
                 Card::CATEGORY_FIELD => $this->getCategory(),
                 Card::PICTURE_FIELD => $this->getPicture(),
@@ -44,6 +45,16 @@ class GeneratorHelper
     public function getName(): string
     {
         return 'Hereos the hero';
+    }
+
+    /**
+     * Returns name as string.
+     *
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return 'asdfasdf';
     }
 
     /**
@@ -122,7 +133,7 @@ class GeneratorHelper
      */
     public function getCardType(): string
     {
-        return 'asdfas';
+        return 'light_melee_infantry';
     }
 
     /**

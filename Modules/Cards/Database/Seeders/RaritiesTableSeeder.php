@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 class RaritiesTableSeeder extends Seeder
 {
     /**
-     *
+     * If one of these will be changed note to change same in following class at switch case statement:
+     * \Modules\Generator\Services\Generator\Attributes\TotalPowerGeneratorService::getRarityTotal
      */
     private const DEFAULT_RARITY_VALUES = [
         [
@@ -28,6 +29,10 @@ class RaritiesTableSeeder extends Seeder
         [
             'Gold',
             'gold'
+        ],
+        [
+            'Legend',
+            'legend'
         ]
     ];
 

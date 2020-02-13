@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\DB;
 class CardTypesTableSeeder extends Seeder
 {
     /**
-     * If one of these will be changed note to change same in following class:
-     * \Modules\Generator\Services\Generator\Attributes\LifeGeneratorService
+     *
      */
     private const DEFAULT_RARITY_VALUES = [
         [

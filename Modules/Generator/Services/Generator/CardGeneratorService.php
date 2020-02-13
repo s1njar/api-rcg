@@ -22,6 +22,6 @@ class CardGeneratorService
      */
     public function execute(CardGeneratorModel $cardGenerator): CardGeneratorModel
     {
-        r
+
     }
 }

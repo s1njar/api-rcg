@@ -4,6 +4,7 @@ namespace Modules\Generator\Helper;
 
 use Illuminate\Http\Request;
 use Modules\Cards\Entities\Card;
+use Modules\Generator\Model\CardGeneratorModel;
 
 /**
  * Class GeneratorHelper
@@ -35,6 +36,56 @@ class GeneratorHelper
         );
 
         return $request;
+    }
+
+    /**
+     * Takes data and combines it in request object.
+     *
+     * @param CardGeneratorModel $cardGeneratorModel
+     * @return Request
+     */
+    public function getRequest(CardGeneratorModel $cardGeneratorModel): Request
+    {
+        $request = new Request();
+        $request->setMethod('POST');
+        $request->request->add(
+            [
+                Card::NAME_FIELD => $cardGeneratorModel->getName(),
+                Card::CODE_FIELD => $cardGeneratorModel->getCode(),
+                Card::LIFE_FIELD => $cardGeneratorModel->getLife(),
+                Card::MORAL_FIELD => $cardGeneratorModel->getMoral(),
+                Card::ABILITIES_RELATION => $cardGeneratorModel->getAbilities(),
+                Card::STRENGTH_FIELD => $cardGeneratorModel->getStrength(),
+                Card::CATEGORY_FIELD => $cardGeneratorModel->getCategory(),
+                Card::PICTURE_FIELD => $cardGeneratorModel->getPicture(),
+                Card::CARD_TYPE_FIELD => $cardGeneratorModel->getCardType(),
+                Card::RARITY_TYPE_FIELD => $cardGeneratorModel->getRarity(),
+            ]
+        );
+
+        return $request;
+    }
+
+    /**
+     * Takes data and combines it in array.
+     *
+     * @param CardGeneratorModel $cardGeneratorModel
+     * @return array
+     */
+    public function getArray(CardGeneratorModel $cardGeneratorModel): array
+    {
+        return [
+            Card::NAME_FIELD => $cardGeneratorModel->getName(),
+            Card::CODE_FIELD => $cardGeneratorModel->getCode(),
+            Card::LIFE_FIELD => $cardGeneratorModel->getLife(),
+            Card::MORAL_FIELD => $cardGeneratorModel->getMoral(),
+            Card::ABILITIES_RELATION => $cardGeneratorModel->getAbilities(),
+            Card::STRENGTH_FIELD => $cardGeneratorModel->getStrength(),
+            Card::CATEGORY_FIELD => $cardGeneratorModel->getCategory(),
+            Card::PICTURE_FIELD => $cardGeneratorModel->getPicture(),
+            Card::CARD_TYPE_FIELD => $cardGeneratorModel->getCardType(),
+            Card::RARITY_TYPE_FIELD => $cardGeneratorModel->getRarity(),
+        ];
     }
 
     /**

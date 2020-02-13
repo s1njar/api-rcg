@@ -25,7 +25,7 @@ class PictureGeneratorService implements AttributeGeneratorInterface
 
         $categoryId = $cardGeneratorModel->getCategory();
 
-        $picturePath = storage_path('app/images/cards/' . $categoryId . '/test.jpg');
+        $picturePath = 'app/images/cards/' . $categoryId . '/test.jpg';
         $cardGeneratorModel->setPicture($picturePath);
 
         return $cardGeneratorModel;

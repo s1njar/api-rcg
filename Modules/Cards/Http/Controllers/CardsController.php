@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use Modules\Cards\Entities\Card;
 use Modules\Cards\Services\CardRepositoryService;
 use Modules\Generator\Helper\GeneratorHelper;
+use Modules\Generator\Model\CardGeneratorModel;
+use Modules\Generator\Services\Generator\CardGeneratorService;
 use Throwable;
 
 /**
@@ -23,6 +25,10 @@ class CardsController extends Controller
      * @var GeneratorHelper
      */
     private $generatorHelper;
+    /**
+     * @var CardGeneratorService
+     */
+    private $cardGeneratorService;
 
     /**
      * CardsController constructor.
@@ -32,12 +38,14 @@ class CardsController extends Controller
      */
     public function __construct(
         CardRepositoryService $cardRepositoryService,
-        GeneratorHelper $generatorHelper
+        GeneratorHelper $generatorHelper,
+        CardGeneratorService $cardGeneratorService
     ) {
 //        $this->middleware('auth:api');
 
         $this->cardRepositoryService = $cardRepositoryService;
         $this->generatorHelper = $generatorHelper;
+        $this->cardGeneratorService = $cardGeneratorService;
     }
 
     /**
@@ -47,6 +55,10 @@ class CardsController extends Controller
      */
     public function create(Request $request): JsonResponse
     {
+        $this->cardGeneratorService->execute(new CardGeneratorModel());
+
+        return response()->json(['status' => 'test']);
+
         if ($request->has(Card::CODE_FIELD)) {
             $request->validate([
                 Card::NAME_FIELD => 'required|string',

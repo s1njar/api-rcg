@@ -40,7 +40,7 @@ class CardGeneratorModel
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -56,7 +56,7 @@ class CardGeneratorModel
     /**
      * @return string
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -72,7 +72,7 @@ class CardGeneratorModel
     /**
      * @return int
      */
-    public function getLife(): int
+    public function getLife(): ?int
     {
         return $this->life;
     }
@@ -88,7 +88,7 @@ class CardGeneratorModel
     /**
      * @return int
      */
-    public function getMoral(): int
+    public function getMoral(): ?int
     {
         return $this->moral;
     }
@@ -104,7 +104,7 @@ class CardGeneratorModel
     /**
      * @return array
      */
-    public function getAbilities(): array
+    public function getAbilities(): ?array
     {
         return $this->abilities;
     }
@@ -120,7 +120,7 @@ class CardGeneratorModel
     /**
      * @return int
      */
-    public function getStrength(): int
+    public function getStrength(): ?int
     {
         return $this->strength;
     }
@@ -136,7 +136,7 @@ class CardGeneratorModel
     /**
      * @return string
      */
-    public function getPicture(): string
+    public function getPicture(): ?string
     {
         return $this->picture;
     }
@@ -152,7 +152,7 @@ class CardGeneratorModel
     /**
      * @return int
      */
-    public function getCategory(): int
+    public function getCategory(): ?int
     {
         return $this->category;
     }
@@ -168,7 +168,7 @@ class CardGeneratorModel
     /**
      * @return int
      */
-    public function getCardType(): int
+    public function getCardType(): ?int
     {
         return $this->cardType;
     }
@@ -184,7 +184,7 @@ class CardGeneratorModel
     /**
      * @return int
      */
-    public function getRarity(): int
+    public function getRarity(): ?int
     {
         return $this->rarity;
     }

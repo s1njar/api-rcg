@@ -8,6 +8,7 @@
 namespace Modules\Generator\Services\Generator;
 
 use Modules\Generator\Model\CardGeneratorModel;
+use Modules\Generator\Services\Generator\Attributes\CategoryGeneratorService;
 
 /**
  * Class CardGeneratorService
@@ -15,13 +16,31 @@ use Modules\Generator\Model\CardGeneratorModel;
 class CardGeneratorService
 {
     /**
+     * @var CategoryGeneratorService
+     */
+    private $categoryGeneratorService;
+
+    /**
+     * CardGeneratorService constructor.
+     *
+     * @param CategoryGeneratorService $categoryGeneratorService
+     */
+    public function __construct(
+        CategoryGeneratorService $categoryGeneratorService
+    ) {
+        $this->categoryGeneratorService = $categoryGeneratorService;
+    }
+
+    /**
      * Responsible to create attributes in correct queue.
      *
-     * @param CardGeneratorModel $cardGenerator
+     * @param CardGeneratorModel $cardGeneratorModel
      * @return CardGeneratorModel
      */
-    public function execute(CardGeneratorModel $cardGenerator): CardGeneratorModel
+    public function execute(CardGeneratorModel $cardGeneratorModel): CardGeneratorModel
     {
+        $this->categoryGeneratorService->execute($cardGeneratorModel);
 
+        return $cardGeneratorModel;
     }
 }

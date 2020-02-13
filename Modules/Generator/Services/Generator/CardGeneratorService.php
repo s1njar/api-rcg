@@ -9,6 +9,7 @@ namespace Modules\Generator\Services\Generator;
 
 use Modules\Generator\Model\CardGeneratorModel;
 use Modules\Generator\Services\Generator\Attributes\CategoryGeneratorService;
+use Modules\Generator\Services\Generator\Attributes\NameGeneratorService;
 
 /**
  * Class CardGeneratorService
@@ -19,16 +20,23 @@ class CardGeneratorService
      * @var CategoryGeneratorService
      */
     private $categoryGeneratorService;
+    /**
+     * @var NameGeneratorService
+     */
+    private $nameGeneratorService;
 
     /**
      * CardGeneratorService constructor.
      *
      * @param CategoryGeneratorService $categoryGeneratorService
+     * @param NameGeneratorService $nameGeneratorService
      */
     public function __construct(
-        CategoryGeneratorService $categoryGeneratorService
+        CategoryGeneratorService $categoryGeneratorService,
+        NameGeneratorService $nameGeneratorService
     ) {
         $this->categoryGeneratorService = $categoryGeneratorService;
+        $this->nameGeneratorService = $nameGeneratorService;
     }
 
     /**
@@ -40,6 +48,7 @@ class CardGeneratorService
     public function execute(CardGeneratorModel $cardGeneratorModel): CardGeneratorModel
     {
         $this->categoryGeneratorService->execute($cardGeneratorModel);
+        $this->nameGeneratorService->execute($cardGeneratorModel);
 
         return $cardGeneratorModel;
     }

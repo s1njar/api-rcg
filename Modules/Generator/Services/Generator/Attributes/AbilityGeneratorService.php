@@ -5,6 +5,9 @@ namespace Modules\Generator\Services\Generator\Attributes;
 use Modules\Generator\Model\CardGeneratorModel;
 use Modules\Generator\Services\Generator\AttributeGeneratorInterface;
 
+/**
+ * Class AbilityGeneratorService
+ */
 class AbilityGeneratorService implements AttributeGeneratorInterface
 {
     /**

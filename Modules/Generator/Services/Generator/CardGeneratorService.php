@@ -13,6 +13,7 @@ use Modules\Generator\Model\CardGeneratorModel;
 use Modules\Generator\Services\Generator\Attributes\AbilityGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\CardTypeGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\CategoryGeneratorService;
+use Modules\Generator\Services\Generator\Attributes\CodeGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\NameGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\PictureGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\RarityGeneratorService;
@@ -51,6 +52,10 @@ class CardGeneratorService
      * @var AbilityGeneratorService
      */
     private $abilityGeneratorService;
+    /**
+     * @var CodeGeneratorService
+     */
+    private $codeGeneratorService;
 
     /**
      * CardGeneratorService constructor.
@@ -62,6 +67,7 @@ class CardGeneratorService
      * @param CardTypeGeneratorService $cardTypeGeneratorService
      * @param TotalPowerGeneratorService $totalPowerGeneratorService
      * @param AbilityGeneratorService $abilityGeneratorService
+     * @param CodeGeneratorService $codeGeneratorService
      */
     public function __construct(
         CategoryGeneratorService $categoryGeneratorService,
@@ -70,7 +76,8 @@ class CardGeneratorService
         RarityGeneratorService $rarityGeneratorService,
         CardTypeGeneratorService $cardTypeGeneratorService,
         TotalPowerGeneratorService $totalPowerGeneratorService,
-        AbilityGeneratorService $abilityGeneratorService
+        AbilityGeneratorService $abilityGeneratorService,
+        CodeGeneratorService $codeGeneratorService
     ) {
         $this->categoryGeneratorService = $categoryGeneratorService;
         $this->nameGeneratorService = $nameGeneratorService;
@@ -79,6 +86,7 @@ class CardGeneratorService
         $this->cardTypeGeneratorService = $cardTypeGeneratorService;
         $this->totalPowerGeneratorService = $totalPowerGeneratorService;
         $this->abilityGeneratorService = $abilityGeneratorService;
+        $this->codeGeneratorService = $codeGeneratorService;
     }
 
     /**
@@ -97,6 +105,7 @@ class CardGeneratorService
         $this->cardTypeGeneratorService->execute($cardGeneratorModel);
         $this->totalPowerGeneratorService->execute($cardGeneratorModel);
         $this->abilityGeneratorService->execute($cardGeneratorModel);
+        $this->codeGeneratorService->execute($cardGeneratorModel);
 
         return $cardGeneratorModel;
     }

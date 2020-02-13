@@ -11,6 +11,7 @@ use Modules\Generator\Model\CardGeneratorModel;
 use Modules\Generator\Services\Generator\Attributes\CategoryGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\NameGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\PictureGeneratorService;
+use Modules\Generator\Services\Generator\Attributes\RarityGeneratorService;
 
 /**
  * Class CardGeneratorService
@@ -29,6 +30,10 @@ class CardGeneratorService
      * @var PictureGeneratorService
      */
     private $pictureGeneratorService;
+    /**
+     * @var RarityGeneratorService
+     */
+    private $rarityGeneratorService;
 
     /**
      * CardGeneratorService constructor.
@@ -36,15 +41,18 @@ class CardGeneratorService
      * @param CategoryGeneratorService $categoryGeneratorService
      * @param NameGeneratorService $nameGeneratorService
      * @param PictureGeneratorService $pictureGeneratorService
+     * @param RarityGeneratorService $rarityGeneratorService
      */
     public function __construct(
         CategoryGeneratorService $categoryGeneratorService,
         NameGeneratorService $nameGeneratorService,
-        PictureGeneratorService $pictureGeneratorService
+        PictureGeneratorService $pictureGeneratorService,
+        RarityGeneratorService $rarityGeneratorService
     ) {
         $this->categoryGeneratorService = $categoryGeneratorService;
         $this->nameGeneratorService = $nameGeneratorService;
         $this->pictureGeneratorService = $pictureGeneratorService;
+        $this->rarityGeneratorService = $rarityGeneratorService;
     }
 
     /**
@@ -58,6 +66,7 @@ class CardGeneratorService
         $this->categoryGeneratorService->execute($cardGeneratorModel);
         $this->nameGeneratorService->execute($cardGeneratorModel);
         $this->pictureGeneratorService->execute($cardGeneratorModel);
+        $this->rarityGeneratorService->execute($cardGeneratorModel);
 
         return $cardGeneratorModel;
     }

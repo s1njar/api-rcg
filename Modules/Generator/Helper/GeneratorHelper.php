@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Cards\Helper;
+namespace Modules\Generator\Helper;
 
 use Illuminate\Http\Request;
 use Modules\Cards\Entities\Card;

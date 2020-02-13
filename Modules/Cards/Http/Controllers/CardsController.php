@@ -6,8 +6,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cards\Entities\Card;
-use Modules\Cards\Helper\GeneratorHelper;
 use Modules\Cards\Services\CardRepositoryService;
+use Modules\Generator\Helper\GeneratorHelper;
 use Throwable;
 
 /**

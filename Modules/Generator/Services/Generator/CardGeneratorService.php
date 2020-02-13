@@ -8,6 +8,7 @@
 namespace Modules\Generator\Services\Generator;
 
 use Modules\Generator\Model\CardGeneratorModel;
+use Modules\Generator\Services\Generator\Attributes\CardTypeGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\CategoryGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\NameGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\PictureGeneratorService;
@@ -34,6 +35,10 @@ class CardGeneratorService
      * @var RarityGeneratorService
      */
     private $rarityGeneratorService;
+    /**
+     * @var CardTypeGeneratorService
+     */
+    private $cardTypeGeneratorService;
 
     /**
      * CardGeneratorService constructor.
@@ -42,17 +47,20 @@ class CardGeneratorService
      * @param NameGeneratorService $nameGeneratorService
      * @param PictureGeneratorService $pictureGeneratorService
      * @param RarityGeneratorService $rarityGeneratorService
+     * @param CardTypeGeneratorService $cardTypeGeneratorService
      */
     public function __construct(
         CategoryGeneratorService $categoryGeneratorService,
         NameGeneratorService $nameGeneratorService,
         PictureGeneratorService $pictureGeneratorService,
-        RarityGeneratorService $rarityGeneratorService
+        RarityGeneratorService $rarityGeneratorService,
+        CardTypeGeneratorService $cardTypeGeneratorService
     ) {
         $this->categoryGeneratorService = $categoryGeneratorService;
         $this->nameGeneratorService = $nameGeneratorService;
         $this->pictureGeneratorService = $pictureGeneratorService;
         $this->rarityGeneratorService = $rarityGeneratorService;
+        $this->cardTypeGeneratorService = $cardTypeGeneratorService;
     }
 
     /**
@@ -67,6 +75,7 @@ class CardGeneratorService
         $this->nameGeneratorService->execute($cardGeneratorModel);
         $this->pictureGeneratorService->execute($cardGeneratorModel);
         $this->rarityGeneratorService->execute($cardGeneratorModel);
+        $this->cardTypeGeneratorService->execute($cardGeneratorModel);
 
         return $cardGeneratorModel;
     }

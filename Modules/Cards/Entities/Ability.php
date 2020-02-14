@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Ability
- * @package Modules\Cards\Entities
  */
 class Ability extends Model
 {
     public const NAME_FIELD = 'name';
+    public const CODE_FIELD = 'code';
     public const ABILITY_FIELD = 'ability';
     public const TYPE_FIELD = 'type';
     public const TARGET_FIELD = 'target';
@@ -30,6 +30,7 @@ class Ability extends Model
      */
     protected $fillable = [
         self::NAME_FIELD,
+        self::CODE_FIELD,
         self::ABILITY_FIELD,
         self::TYPE_FIELD,
         self::TARGET_FIELD,

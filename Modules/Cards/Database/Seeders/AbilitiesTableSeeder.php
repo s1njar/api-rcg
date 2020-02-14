@@ -18,6 +18,7 @@ class AbilitiesTableSeeder extends Seeder
     private const DEFAULT_ABILITY_VALUES = [
         [
             'name' => 'Leichtgewicht',
+            'code' => 'leichtgewicht',
             'ability' => 'Wähle eine Einheit aus, die sich danach schneller bewegen kann.',
             'type' => '1',
             'target' => '1',
@@ -31,6 +32,7 @@ class AbilitiesTableSeeder extends Seeder
         ],
         [
             'name' => 'Verlangsamung',
+            'code' => 'verlangsamung',
             'ability' => 'Wähle eine Einheit aus, die sich danach langsamer bewegt.',
             'type' => '1',
             'target' => '2',
@@ -56,6 +58,7 @@ class AbilitiesTableSeeder extends Seeder
         foreach (self::DEFAULT_ABILITY_VALUES as $value) {
             $this->insert(
                 $value['name'],
+                $value['code'],
                 $value['ability'],
                 $value['type'],
                 $value['target'],
@@ -72,6 +75,7 @@ class AbilitiesTableSeeder extends Seeder
 
     /**
      * @param string $name
+     * @param string $code
      * @param string $ability
      * @param int $type
      * @param int $target
@@ -85,6 +89,7 @@ class AbilitiesTableSeeder extends Seeder
      */
     private function insert(
         string $name,
+        string $code,
         string $ability,
         int $type,
         int $target,
@@ -98,10 +103,11 @@ class AbilitiesTableSeeder extends Seeder
     ) {
         DB::table('abilities')->updateOrInsert(
             [
-                'name' => $name
+                'code' => $code
             ],
             [
                 'name' => $name,
+                'code' => $code,
                 'ability' => $ability,
                 'type' => $type,
                 'target' => $target,

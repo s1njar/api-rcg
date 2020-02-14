@@ -16,6 +16,7 @@ class CreateAbilitiesTable extends Migration
         Schema::create('abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('code')->unique();
             $table->string('ability');
             $table->integer('type');
             $table->integer('target');

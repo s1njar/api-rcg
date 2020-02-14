@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class RaritiesTableSeederTableSeeder
- * @package Modules\Cards\Database\Seeders
  */
 class RaritiesTableSeeder extends Seeder
 {
@@ -19,20 +18,20 @@ class RaritiesTableSeeder extends Seeder
      */
     private const DEFAULT_RARITY_VALUES = [
         [
-            'Bronze',
-            'bronze'
+            'name' => 'Bronze',
+            'code' => 'bronze'
         ],
         [
-            'Silver',
-            'silver'
+            'name' => 'Silver',
+            'code' => 'silver'
         ],
         [
-            'Gold',
-            'gold'
+            'name' => 'Gold',
+            'code' => 'gold'
         ],
         [
-            'Legend',
-            'legend'
+            'name' => 'Legend',
+            'code' => 'legend'
         ]
     ];
 
@@ -46,7 +45,10 @@ class RaritiesTableSeeder extends Seeder
         Model::unguard();
 
         foreach (self::DEFAULT_RARITY_VALUES as $value) {
-            $this->insert($value[0], $value[1]);
+            $this->insert(
+                $value['name'],
+                $value['code']
+            );
         }
     }
 

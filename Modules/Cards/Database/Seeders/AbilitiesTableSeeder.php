@@ -25,9 +25,9 @@ class AbilitiesTableSeeder extends Seeder
             'calc_value' => '1',
             'range' => '0',
             'target_attribute' => '',
-            'target_card_type' => '',
-            'source_rarity' => '',
-            'source_card_type' => ''
+            'target_card_type' => 0,
+            'source_rarity' => 0,
+            'source_card_type' => 0
         ],
         [
             'name' => 'Verlangsamung',
@@ -38,9 +38,9 @@ class AbilitiesTableSeeder extends Seeder
             'calc_value' => '1',
             'range' => '0',
             'target_attribute' => '',
-            'target_card_type' => '',
-            'source_rarity' => '',
-            'source_card_type' => ''
+            'target_card_type' => 0,
+            'source_rarity' => 0,
+            'source_card_type' => 0
         ]
     ];
 
@@ -71,30 +71,30 @@ class AbilitiesTableSeeder extends Seeder
     }
 
     /**
-     * @param $name
-     * @param $ability
-     * @param $type
-     * @param $target
-     * @param $calcOperator
-     * @param $calcValue
-     * @param $range
-     * @param $targetAttribute
-     * @param $targetCardType
-     * @param $sourceRarity
-     * @param $sourceCardType
+     * @param string $name
+     * @param string $ability
+     * @param int $type
+     * @param int $target
+     * @param string $calcOperator
+     * @param int $calcValue
+     * @param int $range
+     * @param string $targetAttribute
+     * @param int $targetCardType
+     * @param int $sourceRarity
+     * @param int $sourceCardType
      */
     private function insert(
-        $name,
-        $ability,
-        $type,
-        $target,
-        $calcOperator,
-        $calcValue,
-        $range,
-        $targetAttribute,
-        $targetCardType,
-        $sourceRarity,
-        $sourceCardType
+        string $name,
+        string $ability,
+        int $type,
+        int $target,
+        string $calcOperator,
+        int $calcValue,
+        int $range,
+        string $targetAttribute,
+        int $targetCardType,
+        int $sourceRarity,
+        int $sourceCardType
     ) {
         DB::table('abilities')->insertOrIgnore([
             'name' => $name,

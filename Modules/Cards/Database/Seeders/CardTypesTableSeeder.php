@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class CardTypesTableSeeder
+ */
 class CardTypesTableSeeder extends Seeder
 {
     /**
@@ -14,24 +17,24 @@ class CardTypesTableSeeder extends Seeder
      */
     private const DEFAULT_RARITY_VALUES = [
         [
-            'Light Melee Infantry',
-            'light_melee_infantry'
+            'name' => 'Light Melee Infantry',
+            'code' => 'light_melee_infantry'
         ],
         [
-            'Heavy Melee Infantry',
-            'heavy_Melee_infantry'
+            'name' => 'Heavy Melee Infantry',
+            'code' => 'heavy_Melee_infantry'
         ],
         [
-            'Light Distance Infantry',
-            'light_distance_infantry'
+            'name' => 'Light Distance Infantry',
+            'code' => 'light_distance_infantry'
         ],
         [
-            'Heavy Distance Infantry',
-            'heavy_distance_infantry'
+            'name' => 'Heavy Distance Infantry',
+            'code' => 'heavy_distance_infantry'
         ],
         [
-            'Cavalry',
-            'cavalry'
+            'name' => 'Cavalry',
+            'code' => 'cavalry'
         ]
     ];
 
@@ -45,7 +48,10 @@ class CardTypesTableSeeder extends Seeder
         Model::unguard();
 
         foreach (self::DEFAULT_RARITY_VALUES as $value) {
-            $this->insert($value[0], $value[1]);
+            $this->insert(
+                $value['name'],
+                $value['code']
+            );
         }
     }
 

@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class CategoriesTableSeeder
+ */
 class CategoriesTableSeeder extends Seeder
 {
     /**
@@ -14,16 +17,16 @@ class CategoriesTableSeeder extends Seeder
      */
     private const DEFAULT_CATEGORY_VALUES = [
         [
-            'Ancient Empire',
-            'ancient_empire'
+            'name' => 'Ancient Empire',
+            'code' => 'ancient_empire'
         ],
         [
-            'Medieval',
-            'medieval'
+            'name' => 'Medieval',
+            'code' => 'medieval'
         ],
         [
-            'Magican',
-            'magican'
+            'name' => 'Magican',
+            'code' => 'magican'
         ],
     ];
 
@@ -37,7 +40,10 @@ class CategoriesTableSeeder extends Seeder
         Model::unguard();
 
         foreach (self::DEFAULT_CATEGORY_VALUES as $value) {
-            $this->insert($value[0], $value[1]);
+            $this->insert(
+                $value['name'],
+                $value['code']
+            );
         }
     }
 

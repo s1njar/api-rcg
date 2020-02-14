@@ -68,7 +68,7 @@ class CardsController extends Controller
                 Card::STRENGTH_FIELD => 'required|integer',
                 Card::SPEED_FIELD => 'required|integer',
                 Card::RANGE_FIELD => 'required|integer',
-                Card::PICTURE_FIELD => 'required|url',
+                Card::IMAGE_FIELD => 'required|url',
                 Card::CATEGORY_FIELD => 'required|integer',
                 Card::CARD_TYPE_FIELD => 'required|integer',
                 Card::RARITY_TYPE_FIELD => 'required|integer',

@@ -35,7 +35,7 @@ class CardRepositoryService
             Card::STRENGTH_FIELD,
             Card::SPEED_FIELD,
             Card::RANGE_FIELD,
-            Card::PICTURE_FIELD,
+            Card::IMAGE_FIELD,
         ]);
 
         $relations = $request->only([

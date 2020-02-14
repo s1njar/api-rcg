@@ -32,7 +32,7 @@ class CardGeneratorModel
     private $range;
 
     /** @var string */
-    private $picture;
+    private $image;
 
     /** @var int */
     private $category;
@@ -174,17 +174,17 @@ class CardGeneratorModel
     /**
      * @return string
      */
-    public function getPicture(): ?string
+    public function getImage(): ?string
     {
-        return $this->picture;
+        return $this->image;
     }
 
     /**
-     * @param string $picture
+     * @param string $image
      */
-    public function setPicture(string $picture): void
+    public function setImage(string $image): void
     {
-        $this->picture = $picture;
+        $this->image = $image;
     }
 
     /**

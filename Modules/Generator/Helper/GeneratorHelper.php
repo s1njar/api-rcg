@@ -31,7 +31,7 @@ class GeneratorHelper
                 Card::SPEED_FIELD => $this->getSpeed(),
                 Card::RANGE_FIELD => $this->getRange(),
                 Card::CATEGORY_FIELD => $this->getCategory(),
-                Card::PICTURE_FIELD => $this->getPicture(),
+                Card::IMAGE_FIELD => $this->getImage(),
                 Card::CARD_TYPE_FIELD => $this->getCardType(),
                 Card::RARITY_TYPE_FIELD => $this->getRarity(),
             ]
@@ -61,7 +61,7 @@ class GeneratorHelper
                 Card::SPEED_FIELD => $cardGeneratorModel->getSpeed(),
                 Card::RANGE_FIELD => $cardGeneratorModel->getRange(),
                 Card::CATEGORY_FIELD => $cardGeneratorModel->getCategory(),
-                Card::PICTURE_FIELD => $cardGeneratorModel->getPicture(),
+                Card::IMAGE_FIELD => $cardGeneratorModel->getImage(),
                 Card::CARD_TYPE_FIELD => $cardGeneratorModel->getCardType(),
                 Card::RARITY_TYPE_FIELD => $cardGeneratorModel->getRarity(),
             ]
@@ -88,7 +88,7 @@ class GeneratorHelper
             Card::SPEED_FIELD => $cardGeneratorModel->getSpeed(),
             Card::RANGE_FIELD => $cardGeneratorModel->getRange(),
             Card::CATEGORY_FIELD => $cardGeneratorModel->getCategory(),
-            Card::PICTURE_FIELD => $cardGeneratorModel->getPicture(),
+            Card::IMAGE_FIELD => $cardGeneratorModel->getImage(),
             Card::CARD_TYPE_FIELD => $cardGeneratorModel->getCardType(),
             Card::RARITY_TYPE_FIELD => $cardGeneratorModel->getRarity(),
         ];
@@ -111,7 +111,7 @@ class GeneratorHelper
      */
     public function getCode(): string
     {
-        return 'asdf';
+        return 'asdfasdf';
     }
 
     /**
@@ -178,11 +178,11 @@ class GeneratorHelper
     }
 
     /**
-     * Returns picture as string (file_path/url).
+     * Returns image as string (file_path/url).
      *
      * @return string
      */
-    public function getPicture(): string
+    public function getImage(): string
     {
         return 'https://picsum.photos/id/237/200/300';
     }

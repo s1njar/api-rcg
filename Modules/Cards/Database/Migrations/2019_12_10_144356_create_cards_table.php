@@ -24,7 +24,7 @@ class CreateCardsTable extends Migration
             $table->integer('strength');
             $table->integer('speed');
             $table->integer('range');
-            $table->string('picture');
+            $table->string('image');
             $table->unsignedBigInteger('card_type_id')->nullable();
             $table->unsignedBigInteger('rarity_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();

@@ -14,7 +14,7 @@ use Modules\Generator\Services\Generator\Attributes\CardTypeGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\CategoryGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\CodeGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\NameGeneratorService;
-use Modules\Generator\Services\Generator\Attributes\PictureGeneratorService;
+use Modules\Generator\Services\Generator\Attributes\ImageGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\RarityGeneratorService;
 use Modules\Generator\Services\Generator\Attributes\TotalPowerGeneratorService;
 
@@ -32,9 +32,9 @@ class CardGeneratorService
      */
     private $nameGeneratorService;
     /**
-     * @var PictureGeneratorService
+     * @var ImageGeneratorService
      */
-    private $pictureGeneratorService;
+    private $imageGeneratorService;
     /**
      * @var RarityGeneratorService
      */
@@ -61,7 +61,7 @@ class CardGeneratorService
      *
      * @param CategoryGeneratorService $categoryGeneratorService
      * @param NameGeneratorService $nameGeneratorService
-     * @param PictureGeneratorService $pictureGeneratorService
+     * @param ImageGeneratorService $imageGeneratorService
      * @param RarityGeneratorService $rarityGeneratorService
      * @param CardTypeGeneratorService $cardTypeGeneratorService
      * @param TotalPowerGeneratorService $totalPowerGeneratorService
@@ -71,7 +71,7 @@ class CardGeneratorService
     public function __construct(
         CategoryGeneratorService $categoryGeneratorService,
         NameGeneratorService $nameGeneratorService,
-        PictureGeneratorService $pictureGeneratorService,
+        ImageGeneratorService $imageGeneratorService,
         RarityGeneratorService $rarityGeneratorService,
         CardTypeGeneratorService $cardTypeGeneratorService,
         TotalPowerGeneratorService $totalPowerGeneratorService,
@@ -80,7 +80,7 @@ class CardGeneratorService
     ) {
         $this->categoryGeneratorService = $categoryGeneratorService;
         $this->nameGeneratorService = $nameGeneratorService;
-        $this->pictureGeneratorService = $pictureGeneratorService;
+        $this->imageGeneratorService = $imageGeneratorService;
         $this->rarityGeneratorService = $rarityGeneratorService;
         $this->cardTypeGeneratorService = $cardTypeGeneratorService;
         $this->totalPowerGeneratorService = $totalPowerGeneratorService;
@@ -99,7 +99,7 @@ class CardGeneratorService
     {
         $this->categoryGeneratorService->execute($cardGeneratorModel);
         $this->nameGeneratorService->execute($cardGeneratorModel);
-        $this->pictureGeneratorService->execute($cardGeneratorModel);
+        $this->imageGeneratorService->execute($cardGeneratorModel);
         $this->rarityGeneratorService->execute($cardGeneratorModel);
         $this->cardTypeGeneratorService->execute($cardGeneratorModel);
         $this->totalPowerGeneratorService->execute($cardGeneratorModel);

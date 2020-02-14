@@ -6,10 +6,10 @@ use Modules\Generator\Model\CardGeneratorModel;
 use Modules\Generator\Services\Generator\AttributeGeneratorInterface;
 
 /**
- * Class PictureGeneratorService
+ * Class ImageGeneratorService
  * @package Modules\Generator\Services\Generator\Attributes
  */
-class PictureGeneratorService implements AttributeGeneratorInterface
+class ImageGeneratorService implements AttributeGeneratorInterface
 {
     /**
      * Generates new attribute or uses existing if it's already set.
@@ -19,14 +19,14 @@ class PictureGeneratorService implements AttributeGeneratorInterface
      */
     public function execute(CardGeneratorModel $cardGeneratorModel): CardGeneratorModel
     {
-        if ($cardGeneratorModel->getPicture()) {
+        if ($cardGeneratorModel->getImage()) {
             return $cardGeneratorModel;
         }
 
         $categoryId = $cardGeneratorModel->getCategory();
 
-        $picturePath = 'app/images/cards/' . $categoryId . '/test.jpg';
-        $cardGeneratorModel->setPicture($picturePath);
+        $imagePath = 'app/images/cards/' . $categoryId . '/test.jpg';
+        $cardGeneratorModel->setImage($imagePath);
 
         return $cardGeneratorModel;
     }

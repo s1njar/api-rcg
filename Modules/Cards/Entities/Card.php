@@ -20,7 +20,7 @@ class Card extends Model
     public const SPEED_FIELD = 'speed';
     public const RANGE_FIELD = 'range';
     public const CATEGORY_FIELD = 'category_id';
-    public const PICTURE_FIELD = 'picture';
+    public const IMAGE_FIELD = 'image';
     public const CARD_TYPE_FIELD = 'card_type_id';
     public const RARITY_TYPE_FIELD = 'rarity_id';
 
@@ -40,7 +40,7 @@ class Card extends Model
         self::SPEED_FIELD,
         self::RANGE_FIELD,
         self::CATEGORY_FIELD,
-        self::PICTURE_FIELD,
+        self::IMAGE_FIELD,
         self::CARD_TYPE_FIELD,
         self::RARITY_TYPE_FIELD,
     ];

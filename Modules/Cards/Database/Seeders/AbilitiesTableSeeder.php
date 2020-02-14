@@ -96,20 +96,25 @@ class AbilitiesTableSeeder extends Seeder
         int $sourceRarity,
         int $sourceCardType
     ) {
-        DB::table('abilities')->insertOrIgnore([
-            'name' => $name,
-            'ability' => $ability,
-            'type' => $type,
-            'target' => $target,
-            'calc_operator' => $calcOperator,
-            'calc_value' => $calcValue,
-            'range' => $range,
-            'target_attribute' => $targetAttribute,
-            'target_card_type' => $targetCardType,
-            'source_rarity' => $sourceRarity,
-            'source_card_type' => $sourceCardType,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        DB::table('abilities')->updateOrInsert(
+            [
+                'name' => $name
+            ],
+            [
+                'name' => $name,
+                'ability' => $ability,
+                'type' => $type,
+                'target' => $target,
+                'calc_operator' => $calcOperator,
+                'calc_value' => $calcValue,
+                'range' => $range,
+                'target_attribute' => $targetAttribute,
+                'target_card_type' => $targetCardType,
+                'source_rarity' => $sourceRarity,
+                'source_card_type' => $sourceCardType,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
     }
 }

@@ -3,9 +3,11 @@
 namespace Modules\Cards\Database\Seeders;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Cards\Entities\Rarity;
 
 /**
  * Class RaritiesTableSeederTableSeeder
@@ -58,11 +60,16 @@ class RaritiesTableSeeder extends Seeder
      */
     private function insert(string $name, string $code)
     {
-        DB::table('rarities')->insertOrIgnore([
-            'name' => $name,
-            'code' => $code,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        DB::table('rarities')->updateOrInsert(
+            [
+                'code' => $code
+            ],
+            [
+                'name' => $name,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
     }
 }

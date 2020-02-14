@@ -53,11 +53,16 @@ class CategoriesTableSeeder extends Seeder
      */
     private function insert(string $name, string $code)
     {
-        DB::table('categories')->insertOrIgnore([
-            'name' => $name,
-            'code' => $code,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        DB::table('categories')->updateOrInsert(
+            [
+                'code' => $code
+            ],
+            [
+                'name' => $name,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
     }
 }

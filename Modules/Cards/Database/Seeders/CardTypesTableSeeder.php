@@ -61,11 +61,16 @@ class CardTypesTableSeeder extends Seeder
      */
     private function insert(string $name, string $code)
     {
-        DB::table('card_types')->insertOrIgnore([
-            'name' => $name,
-            'code' => $code,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        DB::table('card_types')->updateOrInsert(
+            [
+                'code' => $code
+            ],
+            [
+                'name' => $name,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
     }
 }

@@ -25,6 +25,12 @@ class CardGeneratorModel
     /** @var int */
     private $strength;
 
+    /** @var int */
+    private $speed;
+
+    /** @var int */
+    private $range;
+
     /** @var string */
     private $picture;
 
@@ -131,6 +137,38 @@ class CardGeneratorModel
     public function setStrength(int $strength): void
     {
         $this->strength = $strength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSpeed(): ?int
+    {
+        return $this->speed;
+    }
+
+    /**
+     * @param int $speed
+     */
+    public function setSpeed(int $speed): void
+    {
+        $this->speed = $speed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRange(): ?int
+    {
+        return $this->range;
+    }
+
+    /**
+     * @param int $range
+     */
+    public function setRange(int $range): void
+    {
+        $this->range = $range;
     }
 
     /**

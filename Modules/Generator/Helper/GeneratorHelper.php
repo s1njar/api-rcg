@@ -28,6 +28,8 @@ class GeneratorHelper
                 Card::MORAL_FIELD => $this->getMoral(),
                 Card::ABILITIES_RELATION => $this->getAbilities(),
                 Card::STRENGTH_FIELD => $this->getStrength(),
+                Card::SPEED_FIELD => $this->getSpeed(),
+                Card::RANGE_FIELD => $this->getRange(),
                 Card::CATEGORY_FIELD => $this->getCategory(),
                 Card::PICTURE_FIELD => $this->getPicture(),
                 Card::CARD_TYPE_FIELD => $this->getCardType(),
@@ -56,6 +58,8 @@ class GeneratorHelper
                 Card::MORAL_FIELD => $cardGeneratorModel->getMoral(),
                 Card::ABILITIES_RELATION => $cardGeneratorModel->getAbilities(),
                 Card::STRENGTH_FIELD => $cardGeneratorModel->getStrength(),
+                Card::SPEED_FIELD => $cardGeneratorModel->getSpeed(),
+                Card::RANGE_FIELD => $cardGeneratorModel->getRange(),
                 Card::CATEGORY_FIELD => $cardGeneratorModel->getCategory(),
                 Card::PICTURE_FIELD => $cardGeneratorModel->getPicture(),
                 Card::CARD_TYPE_FIELD => $cardGeneratorModel->getCardType(),
@@ -81,6 +85,8 @@ class GeneratorHelper
             Card::MORAL_FIELD => $cardGeneratorModel->getMoral(),
             Card::ABILITIES_RELATION => $cardGeneratorModel->getAbilities(),
             Card::STRENGTH_FIELD => $cardGeneratorModel->getStrength(),
+            Card::SPEED_FIELD => $cardGeneratorModel->getSpeed(),
+            Card::RANGE_FIELD => $cardGeneratorModel->getRange(),
             Card::CATEGORY_FIELD => $cardGeneratorModel->getCategory(),
             Card::PICTURE_FIELD => $cardGeneratorModel->getPicture(),
             Card::CARD_TYPE_FIELD => $cardGeneratorModel->getCardType(),
@@ -105,7 +111,7 @@ class GeneratorHelper
      */
     public function getCode(): string
     {
-        return 'asdfasdf';
+        return 'asdf';
     }
 
     /**
@@ -136,14 +142,8 @@ class GeneratorHelper
     public function getAbilities(): array
     {
         return [
-            [
-                'name' => 'test1234',
-                'ability' => 'test1234'
-            ],
-            [
-                'name' => 'asdcasdc',
-                'ability' => 'test'
-            ]
+            1,
+            2
         ];
     }
 
@@ -155,6 +155,26 @@ class GeneratorHelper
     public function getStrength(): int
     {
         return 80;
+    }
+
+    /**
+     * Returns strenth as int.
+     *
+     * @return int
+     */
+    public function getSpeed(): int
+    {
+        return 1;
+    }
+
+    /**
+     * Returns strenth as int.
+     *
+     * @return int
+     */
+    public function getRange(): int
+    {
+        return 1;
     }
 
     /**

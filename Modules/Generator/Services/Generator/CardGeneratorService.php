@@ -7,7 +7,6 @@
 
 namespace Modules\Generator\Services\Generator;
 
-use Exception;
 use Modules\Generator\Exceptions\CardGeneratorAttributeException;
 use Modules\Generator\Model\CardGeneratorModel;
 use Modules\Generator\Services\Generator\Attributes\AbilityGeneratorService;

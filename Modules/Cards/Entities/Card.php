@@ -17,6 +17,8 @@ class Card extends Model
     public const LIFE_FIELD = 'life';
     public const MORAL_FIELD = 'moral';
     public const STRENGTH_FIELD = 'strength';
+    public const SPEED_FIELD = 'speed';
+    public const RANGE_FIELD = 'range';
     public const CATEGORY_FIELD = 'category_id';
     public const PICTURE_FIELD = 'picture';
     public const CARD_TYPE_FIELD = 'card_type_id';
@@ -35,6 +37,8 @@ class Card extends Model
         self::LIFE_FIELD,
         self::MORAL_FIELD,
         self::STRENGTH_FIELD,
+        self::SPEED_FIELD,
+        self::RANGE_FIELD,
         self::CATEGORY_FIELD,
         self::PICTURE_FIELD,
         self::CARD_TYPE_FIELD,

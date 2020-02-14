@@ -33,6 +33,8 @@ class CardRepositoryService
             Card::LIFE_FIELD,
             Card::MORAL_FIELD,
             Card::STRENGTH_FIELD,
+            Card::SPEED_FIELD,
+            Card::RANGE_FIELD,
             Card::PICTURE_FIELD,
         ]);
 
@@ -74,7 +76,7 @@ class CardRepositoryService
 
         $card
             ->abilities()
-            ->createMany(
+            ->sync(
                 $relations[Card::ABILITIES_RELATION]
             );
 

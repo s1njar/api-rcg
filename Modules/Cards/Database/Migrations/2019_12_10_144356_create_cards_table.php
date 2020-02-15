@@ -17,7 +17,6 @@ class CreateCardsTable extends Migration
 
         Schema::create('cards', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('status')->default(1);
             $table->string('name');
             $table->string('code')->unique();
             $table->integer('life');
@@ -29,6 +28,7 @@ class CreateCardsTable extends Migration
             $table->unsignedBigInteger('card_type_id')->nullable();
             $table->unsignedBigInteger('rarity_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
+            $table->integer('status')->default(1);
 
             $table->foreign('card_type_id')
                 ->references('id')

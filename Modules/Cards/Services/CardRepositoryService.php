@@ -142,6 +142,8 @@ class CardRepositoryService
     }
 
     /**
+     * Deletes card by id.
+     *
      * @param int $id
      * @return JsonResponse
      * @throws Exception

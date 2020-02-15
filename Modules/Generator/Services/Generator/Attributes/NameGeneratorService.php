@@ -14,8 +14,6 @@ use Modules\Generator\Services\Generator\AttributeGeneratorInterface;
  */
 class NameGeneratorService implements AttributeGeneratorInterface
 {
-    public const API_URL = 'https://www.behindthename.com/api/random.json';
-
     /**
      * List of name categories.
      */
@@ -81,10 +79,10 @@ class NameGeneratorService implements AttributeGeneratorInterface
 
         try {
             $response = $client->get(
-                self::API_URL,
+                config('services.behind_the_name.url'),
                 [
                     'query' => [
-                        'key' => 'ja134081294',
+                        'key' => config('services.behind_the_name.key'),
                         'gender' => 'm',
                         'number' => rand(1, 2),
                         'usage' => $this->getUsage()

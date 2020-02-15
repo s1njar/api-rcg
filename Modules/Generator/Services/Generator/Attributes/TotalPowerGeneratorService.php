@@ -118,7 +118,7 @@ class TotalPowerGeneratorService implements AttributeGeneratorInterface
             case 'legend':
                 $total = 250;
                 break;
-            default :
+            default:
                 throw new CardGeneratorAttributeException(
                     'Fatal: no code matching of rarity',
                     404

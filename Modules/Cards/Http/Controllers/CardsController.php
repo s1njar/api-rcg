@@ -130,7 +130,8 @@ class CardsController extends Controller
             ->execute(
                 $request
                     ->get(
-                        self::QUANTITY_REQUEST_FIELD),
+                        self::QUANTITY_REQUEST_FIELD
+                    ),
                 $request
             );
     }

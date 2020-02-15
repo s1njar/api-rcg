@@ -234,5 +234,4 @@ class CardGeneratorModel
     {
         $this->rarity = $rarity;
     }
-
 }

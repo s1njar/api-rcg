@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cards\Entities\Card;
+use Modules\Cards\Services\CardBatchService;
 use Modules\Cards\Services\CardRepositoryService;
 use Modules\Generator\Helper\GeneratorHelper;
 use Modules\Generator\Model\CardGeneratorModel;
@@ -17,6 +18,9 @@ use Throwable;
  */
 class CardsController extends Controller
 {
+    public const QUANTITY_REQUEST_FIELD = 'quantity';
+    public const CUSTOM_REQUEST_FIELD = 'custom';
+
     /**
      * @var CardRepositoryService
      */
@@ -29,6 +33,10 @@ class CardsController extends Controller
      * @var CardGeneratorService
      */
     private $cardGeneratorService;
+    /**
+     * @var CardBatchService
+     */
+    private $cardBatchService;
 
     /**
      * CardsController constructor.
@@ -36,17 +44,20 @@ class CardsController extends Controller
      * @param CardRepositoryService $cardRepositoryService
      * @param GeneratorHelper $generatorHelper
      * @param CardGeneratorService $cardGeneratorService
+     * @param CardBatchService $cardBatchService
      */
     public function __construct(
         CardRepositoryService $cardRepositoryService,
         GeneratorHelper $generatorHelper,
-        CardGeneratorService $cardGeneratorService
+        CardGeneratorService $cardGeneratorService,
+        CardBatchService $cardBatchService
     ) {
 //        $this->middleware('auth:api');
 
         $this->cardRepositoryService = $cardRepositoryService;
         $this->generatorHelper = $generatorHelper;
         $this->cardGeneratorService = $cardGeneratorService;
+        $this->cardBatchService = $cardBatchService;
     }
 
     /**
@@ -60,7 +71,7 @@ class CardsController extends Controller
     {
         $cardGeneratorModel = new CardGeneratorModel();
 
-        if ($request->has('custom') && $request->get('custom')) {
+        if ($request->has(self::CUSTOM_REQUEST_FIELD) && $request->get(self::CUSTOM_REQUEST_FIELD)) {
             $request->validate([
                 Card::NAME_FIELD => 'string',
                 Card::CODE_FIELD => 'string',
@@ -78,14 +89,49 @@ class CardsController extends Controller
 
             $this->generatorHelper->fillModelWithRequest($cardGeneratorModel, $request);
         }
-
         $this->cardGeneratorService->execute($cardGeneratorModel);
+
         return $this->cardRepositoryService
             ->create(
                 $this->generatorHelper
                     ->getRequest(
                         $cardGeneratorModel
                     )
+            );
+    }
+
+    /**
+     * API createBatch endpoint.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws Throwable
+     */
+    public function createBatch(Request $request): JsonResponse
+    {
+        $request->validate([
+            self::QUANTITY_REQUEST_FIELD => 'required|integer',
+            self::CUSTOM_REQUEST_FIELD => 'required|boolean',
+            Card::NAME_FIELD => 'max:0|string',
+            Card::CODE_FIELD => 'max:0|string',
+            Card::LIFE_FIELD => 'integer',
+            Card::MORAL_FIELD => 'integer',
+            Card::STRENGTH_FIELD => 'integer',
+            Card::SPEED_FIELD => 'integer',
+            Card::RANGE_FIELD => 'integer',
+            Card::IMAGE_FIELD => 'url',
+            Card::CATEGORY_FIELD => 'integer',
+            Card::CARD_TYPE_FIELD => 'integer',
+            Card::RARITY_TYPE_FIELD => 'integer',
+            Card::ABILITIES_RELATION => 'array'
+        ]);
+
+        return $this->cardBatchService
+            ->execute(
+                $request
+                    ->get(
+                        self::QUANTITY_REQUEST_FIELD),
+                $request
             );
     }
 

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['api'], 'prefix' => 'card'], function () {
     Route::post('create', 'CardsController@create');
+    Route::post('createBatch', 'CardsController@createBatch');
     Route::post('search', 'CardsController@search');
     Route::post('searchbyid', 'CardsController@searchById');
     Route::post('delete', 'CardsController@delete');

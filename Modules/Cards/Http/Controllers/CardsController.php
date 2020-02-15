@@ -180,4 +180,40 @@ class CardsController extends Controller
 
         return $this->cardRepositoryService->delete($id);
     }
+
+    /**
+     * API disable endpoint.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function enable(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array'
+        ]);
+
+        $ids = $request->get('ids');
+
+        return $this->cardRepositoryService->enable($ids);
+    }
+
+    /**
+     * API disable endpoint.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function disable(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array'
+        ]);
+
+        $ids = $request->get('ids');
+
+        return $this->cardRepositoryService->disable($ids);
+    }
 }

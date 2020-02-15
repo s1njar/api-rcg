@@ -3,8 +3,10 @@
 namespace Modules\Cards\Services;
 
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Cards\Entities\Card;
 use Modules\Cards\Entities\CardType;
 use Modules\Cards\Entities\Category;
@@ -166,5 +168,43 @@ class CardRepositoryService
             'status' => 'ok',
             'card' => $card->getAttributes()
         ], 404);
+    }
+
+    /**
+     * Disables card by id.
+     *
+     * @param array $ids
+     * @return JsonResponse
+     */
+    public function enable(array $ids): JsonResponse
+    {
+        DB::table('cards')
+            ->whereIn('id', $ids)
+            ->update(['status' => 1]);
+
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'The cards with following id`s were enabled.',
+            'cards' => $ids
+        ], 200);
+    }
+
+    /**
+     * Disables card by id.
+     *
+     * @param array $ids
+     * @return JsonResponse
+     */
+    public function disable(array $ids): JsonResponse
+    {
+        DB::table('cards')
+            ->whereIn('id', $ids)
+            ->update(['status' => 0]);
+
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'The cards with following id`s were disabled.',
+            'cards' => $ids
+        ], 200);
     }
 }

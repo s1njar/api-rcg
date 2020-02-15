@@ -50,6 +50,8 @@ class CardsController extends Controller
     }
 
     /**
+     * API create endpoint.
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws Throwable
@@ -57,10 +59,7 @@ class CardsController extends Controller
     public function create(Request $request): JsonResponse
     {
         $cardGeneratorModel = new CardGeneratorModel();
-        $this->cardGeneratorService->execute($cardGeneratorModel);
 
-        return response()->json(['card' => $this->generatorHelper->getArray($cardGeneratorModel)]);
-        die();
         if ($request->has('custom') && $request->get('custom')) {
             $request->validate([
                 Card::NAME_FIELD => 'string',
@@ -91,6 +90,8 @@ class CardsController extends Controller
     }
 
     /**
+     * API search endpoint.
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -100,6 +101,8 @@ class CardsController extends Controller
     }
 
     /**
+     * API searchById endpoint.
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -115,6 +118,8 @@ class CardsController extends Controller
     }
 
     /**
+     * API delete endpoint.
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws \Exception

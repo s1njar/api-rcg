@@ -17,12 +17,15 @@ class CreateCardsTable extends Migration
 
         Schema::create('cards', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('status')->default(1);
             $table->string('name');
             $table->string('code')->unique();
             $table->integer('life');
             $table->integer('moral');
             $table->integer('strength');
-            $table->string('picture');
+            $table->integer('speed');
+            $table->integer('range');
+            $table->string('image');
             $table->unsignedBigInteger('card_type_id')->nullable();
             $table->unsignedBigInteger('rarity_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();

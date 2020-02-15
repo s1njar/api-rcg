@@ -3,12 +3,15 @@
 namespace Modules\Cards\Services;
 
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Cards\Entities\Card;
 use Modules\Cards\Entities\CardType;
 use Modules\Cards\Entities\Category;
 use Modules\Cards\Entities\Rarity;
+use Modules\Generator\Helper\GeneratorHelper;
 use Throwable;
 
 /**
@@ -16,6 +19,21 @@ use Throwable;
  */
 class CardRepositoryService
 {
+    /**
+     * @var GeneratorHelper
+     */
+    private $generatorHelper;
+
+    /**
+     * CardRepositoryService constructor.
+     *
+     * @param GeneratorHelper $generatorHelper
+     */
+    public function __construct(GeneratorHelper $generatorHelper)
+    {
+        $this->generatorHelper = $generatorHelper;
+    }
+
     /**
      * Creates new card.
      *
@@ -33,7 +51,9 @@ class CardRepositoryService
             Card::LIFE_FIELD,
             Card::MORAL_FIELD,
             Card::STRENGTH_FIELD,
-            Card::PICTURE_FIELD,
+            Card::SPEED_FIELD,
+            Card::RANGE_FIELD,
+            Card::IMAGE_FIELD,
         ]);
 
         $relations = $request->only([
@@ -74,7 +94,7 @@ class CardRepositoryService
 
         $card
             ->abilities()
-            ->createMany(
+            ->sync(
                 $relations[Card::ABILITIES_RELATION]
             );
 
@@ -108,7 +128,7 @@ class CardRepositoryService
     public function searchById(int $id): JsonResponse
     {
         /** @var Card $card */
-        $card = Card::find($id);
+        $card = $this->generatorHelper->getBeautifiedCard($id);
 
         if (!$card) {
             return response()->json([
@@ -124,6 +144,8 @@ class CardRepositoryService
     }
 
     /**
+     * Deletes card by id.
+     *
      * @param int $id
      * @return JsonResponse
      * @throws Exception
@@ -146,5 +168,43 @@ class CardRepositoryService
             'status' => 'ok',
             'card' => $card->getAttributes()
         ], 404);
+    }
+
+    /**
+     * Disables card by id.
+     *
+     * @param array $ids
+     * @return JsonResponse
+     */
+    public function enable(array $ids): JsonResponse
+    {
+        DB::table('cards')
+            ->whereIn('id', $ids)
+            ->update(['status' => 1]);
+
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'The cards with following id`s were enabled.',
+            'cards' => $ids
+        ], 200);
+    }
+
+    /**
+     * Disables card by id.
+     *
+     * @param array $ids
+     * @return JsonResponse
+     */
+    public function disable(array $ids): JsonResponse
+    {
+        DB::table('cards')
+            ->whereIn('id', $ids)
+            ->update(['status' => 0]);
+
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'The cards with following id`s were disabled.',
+            'cards' => $ids
+        ], 200);
     }
 }

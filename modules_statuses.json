@@ -1,6 +1,6 @@
 {
     "Account": true,
-    "Example": false,
     "Cards": true,
-    "Deck": true
+    "Deck": true,
+    "Generator": true
 }

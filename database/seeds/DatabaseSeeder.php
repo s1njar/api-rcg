@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Modules\Cards\Database\Seeders\AbilitiesTableSeeder;
 use Modules\Cards\Database\Seeders\CardTypesTableSeeder;
 use Modules\Cards\Database\Seeders\CategoriesTableSeeder;
 use Modules\Cards\Database\Seeders\RaritiesTableSeeder;
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CardTypesTableSeeder::class,
             CategoriesTableSeeder::class,
             RaritiesTableSeeder::class,
+            AbilitiesTableSeeder::class
         ]);
     }
 }

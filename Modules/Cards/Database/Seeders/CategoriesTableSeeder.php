@@ -7,26 +7,11 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class CategoriesTableSeeder
+ */
 class CategoriesTableSeeder extends Seeder
 {
-    /**
-     *
-     */
-    private const DEFAULT_CATEGORY_VALUES = [
-        [
-            'Ancient Empire',
-            'ancient_empire'
-        ],
-        [
-            'Medieval',
-            'medieval'
-        ],
-        [
-            'Magican',
-            'magican'
-        ],
-    ];
-
     /**
      * Run the database seeds.
      *
@@ -36,8 +21,18 @@ class CategoriesTableSeeder extends Seeder
     {
         Model::unguard();
 
-        foreach (self::DEFAULT_CATEGORY_VALUES as $value) {
-            $this->insert($value[0], $value[1]);
+        $categories = json_decode(
+            file_get_contents(
+                storage_path() . '/app/seeder/categories.json'
+            ),
+            true
+        )['categories'];
+
+        foreach ($categories as $category) {
+            $this->insert(
+                $category['name'],
+                $category['code']
+            );
         }
     }
 
@@ -47,11 +42,16 @@ class CategoriesTableSeeder extends Seeder
      */
     private function insert(string $name, string $code)
     {
-        DB::table('categories')->insertOrIgnore([
-            'name' => $name,
-            'code' => $code,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        DB::table('categories')->updateOrInsert(
+            [
+                'code' => $code
+            ],
+            [
+                'name' => $name,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
     }
 }

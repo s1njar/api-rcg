@@ -3,34 +3,17 @@
 namespace Modules\Cards\Database\Seeders;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Cards\Entities\Rarity;
 
 /**
  * Class RaritiesTableSeederTableSeeder
- * @package Modules\Cards\Database\Seeders
  */
 class RaritiesTableSeeder extends Seeder
 {
-    /**
-     *
-     */
-    private const DEFAULT_RARITY_VALUES = [
-        [
-            'Bronze',
-            'bronze'
-        ],
-        [
-            'Silver',
-            'silver'
-        ],
-        [
-            'Gold',
-            'gold'
-        ]
-    ];
-
     /**
      * Run the database seeds.
      *
@@ -40,8 +23,18 @@ class RaritiesTableSeeder extends Seeder
     {
         Model::unguard();
 
-        foreach (self::DEFAULT_RARITY_VALUES as $value) {
-            $this->insert($value[0], $value[1]);
+        $rarities = json_decode(
+            file_get_contents(
+                storage_path() . '/app/seeder/rarities.json'
+            ),
+            true
+        )['rarities'];
+
+        foreach ($rarities as $rarity) {
+            $this->insert(
+                $rarity['name'],
+                $rarity['code']
+            );
         }
     }
 
@@ -51,11 +44,16 @@ class RaritiesTableSeeder extends Seeder
      */
     private function insert(string $name, string $code)
     {
-        DB::table('rarities')->insertOrIgnore([
-            'name' => $name,
-            'code' => $code,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        DB::table('rarities')->updateOrInsert(
+            [
+                'code' => $code
+            ],
+            [
+                'name' => $name,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
     }
 }

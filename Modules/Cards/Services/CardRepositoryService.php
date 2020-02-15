@@ -9,6 +9,7 @@ use Modules\Cards\Entities\Card;
 use Modules\Cards\Entities\CardType;
 use Modules\Cards\Entities\Category;
 use Modules\Cards\Entities\Rarity;
+use Modules\Generator\Helper\GeneratorHelper;
 use Throwable;
 
 /**
@@ -16,6 +17,21 @@ use Throwable;
  */
 class CardRepositoryService
 {
+    /**
+     * @var GeneratorHelper
+     */
+    private $generatorHelper;
+
+    /**
+     * CardRepositoryService constructor.
+     *
+     * @param GeneratorHelper $generatorHelper
+     */
+    public function __construct(GeneratorHelper $generatorHelper)
+    {
+        $this->generatorHelper = $generatorHelper;
+    }
+
     /**
      * Creates new card.
      *
@@ -110,7 +126,7 @@ class CardRepositoryService
     public function searchById(int $id): JsonResponse
     {
         /** @var Card $card */
-        $card = Card::find($id);
+        $card = $this->generatorHelper->getBeautifiedCard($id);
 
         if (!$card) {
             return response()->json([

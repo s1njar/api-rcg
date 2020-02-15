@@ -35,6 +35,7 @@ class CardsController extends Controller
      *
      * @param CardRepositoryService $cardRepositoryService
      * @param GeneratorHelper $generatorHelper
+     * @param CardGeneratorService $cardGeneratorService
      */
     public function __construct(
         CardRepositoryService $cardRepositoryService,
@@ -55,30 +56,35 @@ class CardsController extends Controller
      */
     public function create(Request $request): JsonResponse
     {
-        $cardGeneratorModel = $this->cardGeneratorService->execute(new CardGeneratorModel());
+        $cardGeneratorModel = new CardGeneratorModel();
 
-        return response()->json(['model' => $this->generatorHelper->getArray($cardGeneratorModel)]);
-
-        if ($request->has(Card::CODE_FIELD)) {
+        if ($request->has('custom') && $request->get('custom')) {
             $request->validate([
-                Card::NAME_FIELD => 'required|string',
-                Card::CODE_FIELD => 'required|string',
-                Card::LIFE_FIELD => 'required|integer',
-                Card::MORAL_FIELD => 'required|integer',
-                Card::STRENGTH_FIELD => 'required|integer',
-                Card::SPEED_FIELD => 'required|integer',
-                Card::RANGE_FIELD => 'required|integer',
-                Card::IMAGE_FIELD => 'required|url',
-                Card::CATEGORY_FIELD => 'required|integer',
-                Card::CARD_TYPE_FIELD => 'required|integer',
-                Card::RARITY_TYPE_FIELD => 'required|integer',
-                Card::ABILITIES_RELATION => 'required'
+                Card::NAME_FIELD => 'string',
+                Card::CODE_FIELD => 'string',
+                Card::LIFE_FIELD => 'integer',
+                Card::MORAL_FIELD => 'integer',
+                Card::STRENGTH_FIELD => 'integer',
+                Card::SPEED_FIELD => 'integer',
+                Card::RANGE_FIELD => 'integer',
+                Card::IMAGE_FIELD => 'url',
+                Card::CATEGORY_FIELD => 'integer',
+                Card::CARD_TYPE_FIELD => 'integer',
+                Card::RARITY_TYPE_FIELD => 'integer',
+                Card::ABILITIES_RELATION => 'array'
             ]);
-        } else {
-            $request = $this->generatorHelper->createRequest();
+
+            $this->generatorHelper->fillModelWithRequest($cardGeneratorModel, $request);
         }
 
-        return $this->cardRepositoryService->create($request);
+        $this->cardGeneratorService->execute($cardGeneratorModel);
+        return $this->cardRepositoryService
+            ->create(
+                $this->generatorHelper
+                    ->getRequest(
+                        $cardGeneratorModel
+                    )
+            );
     }
 
     /**

@@ -14,35 +14,6 @@ class GeneratorHelper
     /**
      * Takes data and combines it in request object.
      *
-     * @return Request
-     */
-    public function createRequest(): Request
-    {
-        $request = new Request();
-        $request->setMethod('POST');
-        $request->request->add(
-            [
-                Card::NAME_FIELD => $this->getName(),
-                Card::CODE_FIELD => $this->getCode(),
-                Card::LIFE_FIELD => $this->getLife(),
-                Card::MORAL_FIELD => $this->getMoral(),
-                Card::ABILITIES_RELATION => $this->getAbilities(),
-                Card::STRENGTH_FIELD => $this->getStrength(),
-                Card::SPEED_FIELD => $this->getSpeed(),
-                Card::RANGE_FIELD => $this->getRange(),
-                Card::CATEGORY_FIELD => $this->getCategory(),
-                Card::IMAGE_FIELD => $this->getImage(),
-                Card::CARD_TYPE_FIELD => $this->getCardType(),
-                Card::RARITY_TYPE_FIELD => $this->getRarity(),
-            ]
-        );
-
-        return $request;
-    }
-
-    /**
-     * Takes data and combines it in request object.
-     *
      * @param CardGeneratorModel $cardGeneratorModel
      * @return Request
      */
@@ -94,126 +65,65 @@ class GeneratorHelper
         ];
     }
 
-    /**
-     * Returns name as string.
-     *
-     * @return string
-     */
-    public function getName(): string
+    public function getBeautifiedCard(int $id)
     {
-        return 'Hereos the hero';
+        /** @var Card $card */
+        $card = Card::find($id);
+
+        $card->setAttribute('card_type_id', $card->cardType()->get()->all());
+        $card->setAttribute('rarity_id', $card->rarity()->get()->all());
+        $card->setAttribute('category_id', $card->category()->get()->all());
+        $card->setAttribute('abilities', $card->abilities()->get()->all());
+
+        return $card;
     }
 
     /**
-     * Returns name as string.
+     * Takes request and fills cardGeneratorModel with passed values.
      *
-     * @return string
+     * @param CardGeneratorModel $cardGeneratorModel
+     * @param Request $request
+     * @return CardGeneratorModel
      */
-    public function getCode(): string
+    public function fillModelWithRequest(CardGeneratorModel $cardGeneratorModel, Request $request): CardGeneratorModel
     {
-        return 'asdfasdf';
-    }
+        if ($request->get(Card::NAME_FIELD)) {
+            $cardGeneratorModel->setName($request->get(Card::NAME_FIELD));
+        }
+        if ($request->get(Card::CODE_FIELD)) {
+            $cardGeneratorModel->setCode($request->get(Card::CODE_FIELD));
+        }
+        if ($request->get(Card::LIFE_FIELD)) {
+            $cardGeneratorModel->setLife($request->get(Card::LIFE_FIELD));
+        }
+        if ($request->get(Card::MORAL_FIELD)) {
+            $cardGeneratorModel->setMoral($request->get(Card::MORAL_FIELD));
+        }
+        if ($request->get(Card::ABILITIES_RELATION)) {
+            $cardGeneratorModel->setAbilities($request->get(Card::ABILITIES_RELATION));
+        }
+        if ($request->get(Card::STRENGTH_FIELD)) {
+            $cardGeneratorModel->setStrength($request->get(Card::STRENGTH_FIELD));
+        }
+        if ($request->get(Card::SPEED_FIELD)) {
+            $cardGeneratorModel->setSpeed($request->get(Card::SPEED_FIELD));
+        }
+        if ($request->get(Card::RANGE_FIELD)) {
+            $cardGeneratorModel->setRange($request->get(Card::RANGE_FIELD));
+        }
+        if ($request->get(Card::CATEGORY_FIELD)) {
+            $cardGeneratorModel->setCategory($request->get(Card::CATEGORY_FIELD));
+        }
+        if ($request->get(Card::IMAGE_FIELD)) {
+            $cardGeneratorModel->setImage($request->get(Card::IMAGE_FIELD));
+        }
+        if ($request->get(Card::CARD_TYPE_FIELD)) {
+            $cardGeneratorModel->setCardType($request->get(Card::CARD_TYPE_FIELD));
+        }
+        if ($request->get(Card::RARITY_TYPE_FIELD)) {
+            $cardGeneratorModel->setRarity($request->get(Card::RARITY_TYPE_FIELD));
+        }
 
-    /**
-     * Returns life as int.
-     *
-     * @return int
-     */
-    public function getLife(): int
-    {
-        return 10;
-    }
-
-    /**
-     * Returns moral as int.
-     *
-     * @return int
-     */
-    public function getMoral(): int
-    {
-        return 50;
-    }
-
-    /**
-     * Returns array of ability foreign ids.
-     *
-     * @return array
-     */
-    public function getAbilities(): array
-    {
-        return [
-            1,
-            2
-        ];
-    }
-
-    /**
-     * Returns strenth as int.
-     *
-     * @return int
-     */
-    public function getStrength(): int
-    {
-        return 80;
-    }
-
-    /**
-     * Returns strenth as int.
-     *
-     * @return int
-     */
-    public function getSpeed(): int
-    {
-        return 1;
-    }
-
-    /**
-     * Returns strenth as int.
-     *
-     * @return int
-     */
-    public function getRange(): int
-    {
-        return 1;
-    }
-
-    /**
-     * Returns image as string (file_path/url).
-     *
-     * @return string
-     */
-    public function getImage(): string
-    {
-        return 'https://picsum.photos/id/237/200/300';
-    }
-
-    /**
-     * Returns category as id.
-     *
-     * @return int
-     */
-    public function getCategory(): int
-    {
-        return 1;
-    }
-
-    /**
-     * Returns card_type as id.
-     *
-     * @return int
-     */
-    public function getCardType(): int
-    {
-        return 1;
-    }
-
-    /**
-     * Returns rarity as id.
-     *
-     * @return int
-     */
-    public function getRarity(): int
-    {
-        return 1;
+        return $cardGeneratorModel;
     }
 }

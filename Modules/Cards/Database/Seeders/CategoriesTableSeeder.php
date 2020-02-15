@@ -13,24 +13,6 @@ use Illuminate\Support\Facades\DB;
 class CategoriesTableSeeder extends Seeder
 {
     /**
-     *
-     */
-    private const DEFAULT_CATEGORY_VALUES = [
-        [
-            'name' => 'Ancient Empire',
-            'code' => 'ancient_empire'
-        ],
-        [
-            'name' => 'Medieval',
-            'code' => 'medieval'
-        ],
-        [
-            'name' => 'Magican',
-            'code' => 'magican'
-        ],
-    ];
-
-    /**
      * Run the database seeds.
      *
      * @return void
@@ -39,10 +21,17 @@ class CategoriesTableSeeder extends Seeder
     {
         Model::unguard();
 
-        foreach (self::DEFAULT_CATEGORY_VALUES as $value) {
+        $categories = json_decode(
+            file_get_contents(
+                storage_path() . '/app/seeder/categories.json'
+            ),
+            true
+        )['categories'];
+
+        foreach ($categories as $category) {
             $this->insert(
-                $value['name'],
-                $value['code']
+                $category['name'],
+                $category['code']
             );
         }
     }

@@ -15,29 +15,6 @@ use Modules\Cards\Entities\Rarity;
 class RaritiesTableSeeder extends Seeder
 {
     /**
-     * If one of these will be changed note to change same in following class at switch case statement:
-     * \Modules\Generator\Services\Generator\Attributes\TotalPowerGeneratorService::getRarityTotal
-     */
-    private const DEFAULT_RARITY_VALUES = [
-        [
-            'name' => 'Bronze',
-            'code' => 'bronze'
-        ],
-        [
-            'name' => 'Silver',
-            'code' => 'silver'
-        ],
-        [
-            'name' => 'Gold',
-            'code' => 'gold'
-        ],
-        [
-            'name' => 'Legend',
-            'code' => 'legend'
-        ]
-    ];
-
-    /**
      * Run the database seeds.
      *
      * @return void
@@ -46,10 +23,17 @@ class RaritiesTableSeeder extends Seeder
     {
         Model::unguard();
 
-        foreach (self::DEFAULT_RARITY_VALUES as $value) {
+        $rarities = json_decode(
+            file_get_contents(
+                storage_path() . '/app/seeder/rarities.json'
+            ),
+            true
+        )['rarities'];
+
+        foreach ($rarities as $rarity) {
             $this->insert(
-                $value['name'],
-                $value['code']
+                $rarity['name'],
+                $rarity['code']
             );
         }
     }

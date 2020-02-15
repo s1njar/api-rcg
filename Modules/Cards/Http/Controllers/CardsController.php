@@ -57,7 +57,10 @@ class CardsController extends Controller
     public function create(Request $request): JsonResponse
     {
         $cardGeneratorModel = new CardGeneratorModel();
+        $this->cardGeneratorService->execute($cardGeneratorModel);
 
+        return response()->json(['card' => $this->generatorHelper->getArray($cardGeneratorModel)]);
+        die();
         if ($request->has('custom') && $request->get('custom')) {
             $request->validate([
                 Card::NAME_FIELD => 'string',

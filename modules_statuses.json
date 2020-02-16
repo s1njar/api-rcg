@@ -2,5 +2,6 @@
     "Account": true,
     "Cards": true,
     "Deck": true,
-    "Generator": true
+    "Generator": true,
+    "Search": true
 }

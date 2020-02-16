@@ -2,6 +2,7 @@
 
 namespace Modules\Search\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -43,7 +44,7 @@ class SearchController extends Controller
      *
      * @param Request $request
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function searchCards(Request $request): JsonResponse
     {
@@ -52,6 +53,48 @@ class SearchController extends Controller
         ]);
 
         $table = 'cards';
+        $query = $request->get('query');
+
+        $searchModel = $this->searchHelper->getSearchModelByQuery($table, $query);
+
+        return $this->searchService->execute($searchModel);
+    }
+
+    /**
+     * Card search endpoint.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function searchDecks(Request $request): JsonResponse
+    {
+        $request->validate([
+            'query' => 'required|array'
+        ]);
+
+        $table = 'decks';
+        $query = $request->get('query');
+
+        $searchModel = $this->searchHelper->getSearchModelByQuery($table, $query);
+
+        return $this->searchService->execute($searchModel);
+    }
+
+    /**
+     * Card search endpoint.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function searchAbilities(Request $request): JsonResponse
+    {
+        $request->validate([
+            'query' => 'required|array'
+        ]);
+
+        $table = 'abilities';
         $query = $request->get('query');
 
         $searchModel = $this->searchHelper->getSearchModelByQuery($table, $query);

@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['api'], 'prefix' => 'card'], function () {
     Route::post('search', 'SearchController@searchCards');
 });
+
+Route::group(['middleware' => ['api'], 'prefix' => 'deck'], function () {
+    Route::post('search', 'SearchController@searchDecks');
+});
+
+Route::group(['middleware' => ['api'], 'prefix' => 'ability'], function () {
+    Route::post('search', 'SearchController@searchAbilities');
+});

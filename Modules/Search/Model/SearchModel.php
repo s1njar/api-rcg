@@ -21,10 +21,10 @@ class SearchModel
     /**
      * @param string $field
      * @param string $operator
-     * @param int $value
+     * @param mixed $value
      * @return SearchModel
      */
-    public function addFilter(string $field, string $operator, int $value): SearchModel
+    public function addFilter(string $field, string $operator, $value): SearchModel
     {
         $this->filters[] = [
             'field' => $field,

@@ -50,6 +50,7 @@ class SearchService
     private function build(SearchModel $searchModel): JsonResponse
     {
         $this->searchBuilder = DB::table($searchModel->getTable());
+
         $filters = $searchModel->getFilters() ?: [];
         $orders = $searchModel->getOrders() ?: [];
         $pagination = $searchModel->getPagination();

@@ -53,7 +53,6 @@ class SearchHelper
                     $order['direction']
                 );
             }
-
         } catch (ErrorException $errorException) {
             throw new SearchQueryException(
                 'Seems that the structure of the query is wrong or some filter/order sub-fields are missing.',

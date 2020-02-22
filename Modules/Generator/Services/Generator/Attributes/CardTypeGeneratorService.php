@@ -24,6 +24,7 @@ class CardTypeGeneratorService implements AttributeGeneratorInterface
         }
 
         $cardTypes = CardType::all();
+
         /** @var CardType $cardType */
         $cardType = $cardTypes->random();
 

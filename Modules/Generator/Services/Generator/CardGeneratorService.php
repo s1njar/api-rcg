@@ -114,10 +114,10 @@ class CardGeneratorService
     public function execute(CardGeneratorModel $cardGeneratorModel): CardGeneratorModel
     {
         $this->categoryGeneratorService->execute($cardGeneratorModel);
-        $this->nameGeneratorService->execute($cardGeneratorModel);
-        $this->imageGeneratorService->execute($cardGeneratorModel);
         $this->rarityGeneratorService->execute($cardGeneratorModel);
         $this->cardTypeGeneratorService->execute($cardGeneratorModel);
+        $this->nameGeneratorService->execute($cardGeneratorModel);
+        $this->imageGeneratorService->execute($cardGeneratorModel);
         $this->totalPowerGeneratorService->execute($cardGeneratorModel);
         $this->speedGeneratorService->execute($cardGeneratorModel);
         $this->rangeGeneratorService->execute($cardGeneratorModel);

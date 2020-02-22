@@ -1,0 +1,32 @@
+{
+  "abilities": [
+    {
+      "name": "Leichtgewicht",
+      "code": "leichtgewicht",
+      "ability": "Wähle eine Einheit aus, die sich danach schneller bewegen kann.",
+      "type": 1,
+      "target": 1,
+      "calc_operator": "+",
+      "calc_value": 1,
+      "range": 0,
+      "target_attribute": "speed",
+      "target_card_type": 5,
+      "source_rarity": 4,
+      "source_card_type": 0
+    },
+    {
+      "name": "Verlangsamung",
+      "code": "verlangsamung",
+      "ability": "Wähle eine Einheit aus, die sich danach langsamer bewegt.",
+      "type": 1,
+      "target": 2,
+      "calc_operator": "-",
+      "calc_value": 1,
+      "range": 0,
+      "target_attribute": "speed",
+      "target_card_type": 0,
+      "source_rarity": 0,
+      "source_card_type": 0
+    }
+  ]
+}

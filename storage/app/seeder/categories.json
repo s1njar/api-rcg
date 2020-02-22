@@ -1,0 +1,16 @@
+{
+  "categories": [
+    {
+      "name": "Ancient Empire",
+      "code": "ancient_empire"
+    },
+    {
+      "name": "Medieval",
+      "code": "medieval"
+    },
+    {
+      "name": "Magican",
+      "code": "magican"
+    }
+  ]
+}

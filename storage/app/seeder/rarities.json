@@ -1,0 +1,20 @@
+{
+  "rarities": [
+    {
+      "name": "Bronze",
+      "code": "bronze"
+    },
+    {
+      "name": "Silver",
+      "code": "silver"
+    },
+    {
+      "name": "Gold",
+      "code": "gold"
+    },
+    {
+      "name": "Legend",
+      "code": "legend"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "card_types": [
+    {
+      "name": "Light Melee Infantry",
+      "code": "light_melee_infantry"
+    },
+    {
+      "name": "Heavy Melee Infantry",
+      "code": "heavy_Melee_infantry"
+    },
+    {
+      "name": "Light Distance Infantry",
+      "code": "light_distance_infantry"
+    },
+    {
+      "name": "Heavy Distance Infantry",
+      "code": "heavy_distance_infantry"
+    },
+    {
+      "name": "Cavalry",
+      "code": "cavalry"
+    }
+  ]
+}
